@@ -39,11 +39,11 @@ window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
     if (currentScroll > 100) {
-        navbar.style.background = 'rgba(15, 23, 42, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.2)';
+        navbar.style.background = 'rgba(10, 10, 15, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.5)';
     } else {
-        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
+        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
     }
     
     lastScroll = currentScroll;
@@ -154,12 +154,12 @@ scrollTopBtn.style.cssText = `
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #0066ff 100%);
     color: white;
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
-    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -188,12 +188,12 @@ scrollTopBtn.addEventListener('click', () => {
 // Add hover effect to scroll top button
 scrollTopBtn.addEventListener('mouseenter', () => {
     scrollTopBtn.style.transform = 'translateY(-5px)';
-    scrollTopBtn.style.boxShadow = '0 8px 30px rgba(99, 102, 241, 0.6)';
+    scrollTopBtn.style.boxShadow = '0 8px 30px rgba(0, 212, 255, 0.6)';
 });
 
 scrollTopBtn.addEventListener('mouseleave', () => {
     scrollTopBtn.style.transform = 'translateY(0)';
-    scrollTopBtn.style.boxShadow = '0 5px 20px rgba(99, 102, 241, 0.4)';
+    scrollTopBtn.style.boxShadow = '0 5px 20px rgba(0, 212, 255, 0.4)';
 });
 
 // Form Validation (if you add a contact form later)
@@ -203,6 +203,6 @@ function validateEmail(email) {
 }
 
 // Console Welcome Message
-console.log('%c👋 Welcome to My Portfolio!', 'color: #6366f1; font-size: 20px; font-weight: bold;');
-console.log('%cFeel free to explore the code and reach out if you have any questions!', 'color: #64748b; font-size: 14px;');
+console.log('%c👋 Welcome to My Portfolio!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
+console.log('%cFeel free to explore the code and reach out if you have any questions!', 'color: #a0a0b0; font-size: 14px;');
 
