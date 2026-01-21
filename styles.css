@@ -282,7 +282,14 @@ section {
     position: relative;
     display: inline-block;
     width: 100%;
-    animation: fadeInUp 0.8s ease-out;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section-title.animate {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-title::after {
@@ -332,16 +339,22 @@ section {
     line-height: 1.8;
     color: var(--text-gray);
     margin-bottom: 1.5rem;
-    animation: fadeInUp 0.8s ease-out;
-    animation-fill-mode: both;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.about-text:nth-child(1) {
-    animation-delay: 0.2s;
+.about-text.animate {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.about-text:nth-child(2) {
-    animation-delay: 0.4s;
+.about-text:nth-child(1).animate {
+    transition-delay: 0.1s;
+}
+
+.about-text:nth-child(2).animate {
+    transition-delay: 0.2s;
 }
 
 /* Experience Section */
@@ -368,6 +381,8 @@ section {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .experience-card::before {
@@ -384,6 +399,11 @@ section {
 
 .experience-card:hover::before {
     opacity: 1;
+}
+
+.experience-card.animate {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .experience-card:hover {
@@ -432,6 +452,8 @@ section {
     gap: 1rem;
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
 }
 
 .tech-item::before {
@@ -447,6 +469,11 @@ section {
 
 .tech-item:hover::before {
     left: 100%;
+}
+
+.tech-item.animate {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 .tech-item:hover {
@@ -506,6 +533,8 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
+    opacity: 0;
+    transform: translateY(50px);
 }
 
 .project-card::after {
@@ -524,6 +553,11 @@ section {
     opacity: 1;
 }
 
+.project-card.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .project-card:hover {
     transform: translateY(-15px) scale(1.02);
     box-shadow: 0 20px 50px rgba(0, 212, 255, 0.5);
@@ -532,11 +566,19 @@ section {
 .project-image {
     width: 100%;
     height: 250px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+    overflow: hidden;
+    position: relative;
 }
 
-.project-card:hover .project-image {
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.project-card:hover .project-image img {
     transform: scale(1.1);
 }
 
@@ -604,6 +646,8 @@ section {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateX(-50px);
 }
 
 .education-card::before {
@@ -622,20 +666,36 @@ section {
     transform: scaleY(1);
 }
 
+.education-card.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .education-card:hover {
     transform: translateX(15px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
 }
 
 .education-image {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     border-radius: 10px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
 }
 
-.education-card:hover .education-image {
+.education-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.4s ease;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px;
+}
+
+.education-card:hover .education-image img {
     transform: scale(1.1) rotate(2deg);
 }
 
@@ -896,9 +956,36 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .project-image {
+        height: 220px;
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
     .education-card {
         flex-direction: column;
         text-align: center;
+        gap: 1.5rem;
+    }
+
+    .education-image {
+        width: 100%;
+        max-width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+    .education-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        padding: 10px;
     }
 
     .social-links {
@@ -909,11 +996,32 @@ section {
         min-width: 100px;
         padding: 1rem;
     }
+
+    .about-content {
+        padding: 0 1rem;
+    }
+
+    .experience-content {
+        padding: 0 1rem;
+    }
+
+    .download-content {
+        padding: 0 1rem;
+    }
+
+    .connect-content {
+        padding: 0 1rem;
+    }
 }
 
 @media (max-width: 480px) {
     .title {
         font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
     }
 
     .profile-image {
@@ -923,6 +1031,57 @@ section {
 
     .tech-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .tech-item {
+        padding: 1.5rem;
+    }
+
+    .tech-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .education-image {
+        height: 180px;
+        width: 100%;
+        max-width: 180px;
+    }
+
+    .education-image img {
+        object-fit: contain;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .project-image img {
+        object-fit: cover;
+    }
+
+    .project-content {
+        padding: 1rem;
+    }
+
+    .education-card {
+        padding: 1.5rem;
+    }
+
+    .experience-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .education-image {
+        height: 150px;
+        max-width: 150px;
+    }
+
+    .project-image {
+        height: 180px;
     }
 }
 

@@ -77,26 +77,36 @@ window.addEventListener('scroll', highlightActiveSection);
 const downloadBtn = document.getElementById('downloadBtn');
 
 downloadBtn.addEventListener('click', () => {
-    // Create a temporary anchor element
-    const link = document.createElement('a');
-    link.href = 'resume.pdf'; // Change this to your actual resume file path
-    link.download = 'YourName_Resume.pdf'; // Change to your name
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    // Optional: Show a message
-    const originalText = downloadBtn.innerHTML;
-    downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Started!';
-    downloadBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-    
-    setTimeout(() => {
-        downloadBtn.innerHTML = originalText;
-        downloadBtn.style.background = '';
-    }, 2000);
+    try {
+        // Create a temporary anchor element
+        const link = document.createElement('a');
+        // Use the actual resume filename
+        link.href = './Abdul Muqeet\'s Resume.pdf';
+        link.download = 'Abdul Muqeet\'s Resume.pdf'; // Clean filename for download
+        link.target = '_blank'; // Fallback: open in new tab if download fails
+        
+        // Append to body, click, then remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show success message
+        const originalText = downloadBtn.innerHTML;
+        downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Started!';
+        downloadBtn.style.background = 'linear-gradient(135deg, #00ff88 0%, #00cc66 100%)';
+        
+        setTimeout(() => {
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.style.background = '';
+        }, 2000);
+    } catch (error) {
+        console.error('Download error:', error);
+        // Fallback: try opening in new tab
+        window.open('./Abdul Muqeet CV.pdf', '_blank');
+    }
 });
 
-// Intersection Observer for Animations
+// Intersection Observer for Animations - triggers on both scroll up and down
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -105,19 +115,82 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('animate');
+            // For elements with inline styles
+            if (entry.target.style.opacity === '0' || entry.target.style.opacity === '') {
+                entry.target.style.opacity = '1';
+                // Reset transform based on element type
+                if (entry.target.classList.contains('education-card')) {
+                    entry.target.style.transform = 'translateX(0)';
+                } else {
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            }
+        } else {
+            // Remove animate class when element leaves viewport to allow re-animation
+            entry.target.classList.remove('animate');
+            // Reset to initial state
+            if (entry.target.classList.contains('section-title')) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
+            } else if (entry.target.classList.contains('about-text')) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
+            } else if (entry.target.classList.contains('tech-item')) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px) scale(0.9)';
+            } else if (entry.target.classList.contains('project-card')) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(50px)';
+            } else if (entry.target.classList.contains('education-card')) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateX(-50px)';
+            } else if (entry.target.classList.contains('experience-card')) {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
+            }
         }
     });
 }, observerOptions);
 
-// Observe elements for animation
-const animatedElements = document.querySelectorAll('.tech-item, .project-card, .education-card, .experience-card');
-animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+// Observe section titles
+const sectionTitles = document.querySelectorAll('.section-title');
+sectionTitles.forEach(title => {
+    observer.observe(title);
+});
+
+// Observe about text
+const aboutTexts = document.querySelectorAll('.about-text');
+aboutTexts.forEach(text => {
+    observer.observe(text);
+});
+
+// Observe tech items with staggered animation
+const techItems = document.querySelectorAll('.tech-item');
+techItems.forEach((item, index) => {
+    item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    observer.observe(item);
+});
+
+// Observe project cards
+const projectCards = document.querySelectorAll('.project-card');
+projectCards.forEach((card, index) => {
+    card.style.transition = `opacity 0.8s ease ${index * 0.15}s, transform 0.8s ease ${index * 0.15}s`;
+    observer.observe(card);
+});
+
+// Observe education cards
+const educationCards = document.querySelectorAll('.education-card');
+educationCards.forEach((card, index) => {
+    card.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
+    observer.observe(card);
+});
+
+// Observe experience cards
+const experienceCards = document.querySelectorAll('.experience-card');
+experienceCards.forEach(card => {
+    card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    observer.observe(card);
 });
 
 // Typing Effect for Title (Optional)
