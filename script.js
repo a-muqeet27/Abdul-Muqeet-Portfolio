@@ -8,7 +8,6 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
     hamburger.classList.toggle('active');
     
-    // Prevent body scroll when menu is open
     if (navMenu.classList.contains('active')) {
         body.style.overflow = 'hidden';
     } else {
@@ -16,7 +15,7 @@ hamburger.addEventListener('click', () => {
     }
 });
 
-// Close menu when clicking on a link
+
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
@@ -25,7 +24,7 @@ navLinks.forEach(link => {
     });
 });
 
-// Close menu when clicking outside
+
 document.addEventListener('click', (e) => {
     if (navMenu.classList.contains('active') && 
         !navMenu.contains(e.target) && 
@@ -36,13 +35,12 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 70; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 70; 
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -51,7 +49,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar Background on Scroll
 const navbar = document.getElementById('navbar');
 let lastScroll = 0;
 
@@ -69,7 +66,6 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Active Navigation Link Highlighting
 const sections = document.querySelectorAll('section[id]');
 
 function highlightActiveSection() {
@@ -93,24 +89,19 @@ function highlightActiveSection() {
 
 window.addEventListener('scroll', highlightActiveSection);
 
-// Download Resume Functionality
 const downloadBtn = document.getElementById('downloadBtn');
 
 downloadBtn.addEventListener('click', () => {
     try {
-        // Create a temporary anchor element
         const link = document.createElement('a');
-        // Use the actual resume filename
         link.href = './Abdul Muqeet\'s Resume.pdf';
-        link.download = 'Abdul Muqeet\'s Resume.pdf'; // Clean filename for download
-        link.target = '_blank'; // Fallback: open in new tab if download fails
+        link.download = 'Abdul Muqeet\'s Resume.pdf';
+        link.target = '_blank';
         
-        // Append to body, click, then remove
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         
-        // Show success message
         const originalText = downloadBtn.innerHTML;
         downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Started!';
         downloadBtn.style.background = 'linear-gradient(135deg, #00ff88 0%, #00cc66 100%)';
@@ -121,12 +112,11 @@ downloadBtn.addEventListener('click', () => {
         }, 2000);
     } catch (error) {
         console.error('Download error:', error);
-        // Fallback: try opening in new tab
         window.open('./Abdul Muqeet CV.pdf', '_blank');
     }
 });
 
-// Typing Animation for Subtitle - Letter by Letter
+
 const subtitle = document.querySelector('.subtitle');
 const homeSection = document.getElementById('home');
 let typingTimeout = null;
@@ -157,7 +147,6 @@ function typeText(element, text, speed = 50) {
 function resetTypingAnimation() {
     if (subtitle && !isTyping) {
         isTyping = true;
-        // Clear any existing timeout
         if (typingTimeout) {
             clearTimeout(typingTimeout);
         }
@@ -168,30 +157,24 @@ function resetTypingAnimation() {
             subtitle.setAttribute('data-text', originalText);
         }
         
-        // Reset classes
         subtitle.classList.remove('typing', 'typing-complete');
         subtitle.textContent = '';
         
-        // Force reflow
         void subtitle.offsetWidth;
         
-        // Start typing animation
         typeText(subtitle, originalText, 50).then(() => {
             isTyping = false;
         });
     }
 }
 
-// Observe home section to trigger typing animation
 const homeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Reset and trigger typing animation every time home section is visited
             setTimeout(() => {
                 resetTypingAnimation();
             }, 300);
         } else {
-            // Reset when leaving home section
             if (subtitle && typingTimeout) {
                 clearTimeout(typingTimeout);
                 isTyping = false;
@@ -201,19 +184,16 @@ const homeObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 if (homeSection && subtitle) {
-    // Store original text
     if (!subtitle.getAttribute('data-text')) {
         subtitle.setAttribute('data-text', subtitle.textContent);
     }
     
     homeObserver.observe(homeSection);
-    // Trigger on initial load
     setTimeout(() => {
         resetTypingAnimation();
     }, 500);
 }
 
-// Intersection Observer for Animations - triggers on both scroll up and down
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -223,10 +203,8 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('animate');
-            // For elements with inline styles
             if (entry.target.style.opacity === '0' || entry.target.style.opacity === '') {
                 entry.target.style.opacity = '1';
-                // Reset transform based on element type
                 if (entry.target.classList.contains('education-card')) {
                     entry.target.style.transform = 'translateX(0)';
                 } else {
@@ -234,9 +212,7 @@ const observer = new IntersectionObserver((entries) => {
                 }
             }
         } else {
-            // Remove animate class when element leaves viewport to allow re-animation
             entry.target.classList.remove('animate');
-            // Reset to initial state
             if (entry.target.classList.contains('section-title')) {
                 entry.target.style.opacity = '0';
                 entry.target.style.transform = 'translateY(30px)';
@@ -260,47 +236,44 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe section titles
 const sectionTitles = document.querySelectorAll('.section-title');
 sectionTitles.forEach(title => {
     observer.observe(title);
 });
 
-// Observe about text
 const aboutTexts = document.querySelectorAll('.about-text');
 aboutTexts.forEach(text => {
     observer.observe(text);
 });
 
-// Observe tech items with staggered animation
 const techItems = document.querySelectorAll('.tech-item');
 techItems.forEach((item, index) => {
     item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
     observer.observe(item);
 });
 
-// Observe project cards
+
 const projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach((card, index) => {
     card.style.transition = `opacity 0.8s ease ${index * 0.15}s, transform 0.8s ease ${index * 0.15}s`;
     observer.observe(card);
 });
 
-// Observe education cards
+
 const educationCards = document.querySelectorAll('.education-card');
 educationCards.forEach((card, index) => {
     card.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
     observer.observe(card);
 });
 
-// Observe experience cards
+
 const experienceCards = document.querySelectorAll('.experience-card');
 experienceCards.forEach(card => {
     card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     observer.observe(card);
 });
 
-// Typing Effect for Title (Optional)
+
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
@@ -316,14 +289,6 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// Uncomment below to enable typing effect
-// window.addEventListener('load', () => {
-//     const title = document.querySelector('.title');
-//     const originalText = title.textContent;
-//     typeWriter(title, originalText, 100);
-// });
-
-// Scroll to Top Button (Optional Enhancement)
 const scrollTopBtn = document.createElement('button');
 scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
 scrollTopBtn.className = 'scroll-top-btn';
@@ -365,7 +330,6 @@ scrollTopBtn.addEventListener('click', () => {
     });
 });
 
-// Add hover effect to scroll top button
 scrollTopBtn.addEventListener('mouseenter', () => {
     scrollTopBtn.style.transform = 'translateY(-5px)';
     scrollTopBtn.style.boxShadow = '0 8px 30px rgba(0, 212, 255, 0.6)';
@@ -376,13 +340,11 @@ scrollTopBtn.addEventListener('mouseleave', () => {
     scrollTopBtn.style.boxShadow = '0 5px 20px rgba(0, 212, 255, 0.4)';
 });
 
-// Form Validation (if you add a contact form later)
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
-// GitHub Link Hover - Remove background animations
 const githubLinks = document.querySelectorAll('.project-github-link');
 githubLinks.forEach(link => {
     const projectCard = link.closest('.project-card');
@@ -396,7 +358,6 @@ githubLinks.forEach(link => {
     });
 });
 
-// Console Welcome Message
 console.log('%c👋 Welcome to My Portfolio!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
 console.log('%cFeel free to explore the code and reach out if you have any questions!', 'color: #a0a0b0; font-size: 14px;');
 
