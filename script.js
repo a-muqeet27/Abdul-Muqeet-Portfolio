@@ -126,6 +126,93 @@ downloadBtn.addEventListener('click', () => {
     }
 });
 
+// Typing Animation for Subtitle - Letter by Letter
+const subtitle = document.querySelector('.subtitle');
+const homeSection = document.getElementById('home');
+let typingTimeout = null;
+let isTyping = false;
+
+function typeText(element, text, speed = 50) {
+    return new Promise((resolve) => {
+        element.textContent = '';
+        element.classList.add('typing');
+        let index = 0;
+        
+        function type() {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                index++;
+                typingTimeout = setTimeout(type, speed);
+            } else {
+                element.classList.remove('typing');
+                element.classList.add('typing-complete');
+                resolve();
+            }
+        }
+        
+        type();
+    });
+}
+
+function resetTypingAnimation() {
+    if (subtitle && !isTyping) {
+        isTyping = true;
+        // Clear any existing timeout
+        if (typingTimeout) {
+            clearTimeout(typingTimeout);
+        }
+        
+        // Get original text
+        const originalText = subtitle.getAttribute('data-text') || subtitle.textContent;
+        if (!subtitle.getAttribute('data-text')) {
+            subtitle.setAttribute('data-text', originalText);
+        }
+        
+        // Reset classes
+        subtitle.classList.remove('typing', 'typing-complete');
+        subtitle.textContent = '';
+        
+        // Force reflow
+        void subtitle.offsetWidth;
+        
+        // Start typing animation
+        typeText(subtitle, originalText, 50).then(() => {
+            isTyping = false;
+        });
+    }
+}
+
+// Observe home section to trigger typing animation
+const homeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Reset and trigger typing animation every time home section is visited
+            setTimeout(() => {
+                resetTypingAnimation();
+            }, 300);
+        } else {
+            // Reset when leaving home section
+            if (subtitle && typingTimeout) {
+                clearTimeout(typingTimeout);
+                isTyping = false;
+            }
+        }
+    });
+}, { threshold: 0.3 });
+
+if (homeSection && subtitle) {
+    // Store original text
+    if (!subtitle.getAttribute('data-text')) {
+        subtitle.setAttribute('data-text', subtitle.textContent);
+    }
+    
+    homeObserver.observe(homeSection);
+    // Trigger on initial load
+    setTimeout(() => {
+        resetTypingAnimation();
+    }, 500);
+}
+
 // Intersection Observer for Animations - triggers on both scroll up and down
 const observerOptions = {
     threshold: 0.1,

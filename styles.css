@@ -37,6 +37,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Navigation Bar */
@@ -254,30 +256,32 @@ body {
     opacity: 0.95;
     margin-bottom: 2rem;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-
-    /* Typing effect */
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid #fff; /* cursor */
-    width: 0;
-    animation: 
-        typing 3s steps(30, end) forwards,
-        blink 0.7s step-end infinite;
+    line-height: 1.6;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+    min-height: 3rem;
+    display: inline-block;
 }
 
-/* Typing animation */
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+.subtitle.typing {
+    border-right: 3px solid #fff;
+    animation: blink 0.7s step-end infinite;
+    padding-right: 3px;
+}
+
+.subtitle.typing-complete {
+    border-right: none;
+    padding-right: 0;
 }
 
 /* Cursor blink */
 @keyframes blink {
-    50% {
+    0%, 50% {
+        border-color: #fff;
+    }
+    51%, 100% {
         border-color: transparent;
     }
 }
@@ -297,7 +301,7 @@ body {
 
 /* Section Styles */
 section {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 .section-title {
@@ -459,10 +463,11 @@ section {
 
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 3rem 2rem;
-    margin-top: 3rem;
-    padding: 2rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1rem 0;
+    justify-items: center;
 }
 
 .tech-item {
@@ -502,10 +507,9 @@ section {
 }
 
 .tech-item:hover img {
-    filter: grayscale(0%) brightness(1.2);
+    filter: grayscale(0%) brightness(1.2) drop-shadow(0 0 15px rgba(0, 212, 255, 0.6));
     transform: scale(1.3) rotate(10deg);
     opacity: 1;
-    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.6));
 }
 
 .tech-item span {
@@ -552,13 +556,15 @@ section {
 .projects-grid {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    margin-top: 3rem;
+    gap: 2rem;
+    margin-top: 2rem;
     position: relative;
     z-index: 1;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
+    padding: 0;
 }
 
 .project-card {
@@ -574,7 +580,8 @@ section {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    height: 350px;
+    height: 400px;
+    min-height: 400px;
 }
 
 .project-card:nth-child(even) {
@@ -676,8 +683,7 @@ section {
 }
 
 .project-image {
-    width: 45%;
-    min-width: 300px;
+    width: 50%;
     height: 100%;
     overflow: hidden;
     position: relative;
@@ -807,7 +813,8 @@ section {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    width: 100%;
 }
 
 .education-card {
@@ -989,8 +996,8 @@ section {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }
 
 .social-link {
@@ -1110,17 +1117,62 @@ section {
         margin: 1rem 0;
     }
 
+    section {
+        padding: 40px 0;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .home-section {
+        padding: 80px 15px 30px;
+        min-height: 100vh;
+    }
+
+    .home-content {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
     .title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
     }
 
     .subtitle {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        white-space: normal;
+        word-wrap: break-word;
+        max-width: 100%;
+        padding: 0;
+        text-align: center;
+        min-height: 2.5rem;
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+
+    .subtitle.typing {
+        white-space: normal;
+        word-wrap: break-word;
+    }
+
+    .subtitle.typing-complete {
+        white-space: normal;
+        word-wrap: break-word;
     }
 
     .profile-image {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-image-container {
+        margin-bottom: 1.5rem;
     }
 
     .section-title {
@@ -1128,17 +1180,37 @@ section {
     }
 
     .tech-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        padding: 1rem 0;
+        justify-items: center;
+        margin-top: 1.5rem;
+    }
+
+    .tech-item {
+        padding: 0.8rem;
+    }
+
+    .tech-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .tech-item span {
+        font-size: 0.9rem;
     }
 
     .projects-grid {
-        gap: 2rem;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0;
+        margin-top: 1.5rem;
     }
 
     .project-card {
         flex-direction: column !important;
         height: auto;
-        min-height: 400px;
+        min-height: 380px;
     }
 
     .project-card:nth-child(even) {
@@ -1147,8 +1219,8 @@ section {
 
     .project-image {
         width: 100%;
-        min-width: 100%;
-        height: 250px;
+        height: 50%;
+        min-height: 50%;
     }
 
     .project-image img {
@@ -1157,21 +1229,41 @@ section {
         object-fit: cover;
     }
 
+    .project-content {
+        padding: 1.25rem;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+    }
+
     .project-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .project-title {
+        font-size: 1.3rem;
     }
 
     .project-github-link {
         align-self: flex-start;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .education-content {
+        gap: 1.25rem;
     }
 
     .education-card {
         flex-direction: column;
         text-align: center;
-        gap: 1.5rem;
-        padding: 1.5rem;
+        gap: 1rem;
+        padding: 1.25rem;
     }
 
     .education-image {
@@ -1192,38 +1284,77 @@ section {
 
     .social-links {
         gap: 1rem;
+        margin-top: 1.25rem;
     }
 
     .social-link {
-        min-width: 100px;
-        padding: 1rem;
+        min-width: 80px;
+        padding: 0.875rem 0.5rem;
+    }
+
+    .social-link i {
+        font-size: 1.75rem;
+    }
+
+    .social-link span {
+        font-size: 0.85rem;
     }
 
     .about-content {
-        padding: 0 1rem;
+        padding: 0;
     }
 
     .experience-content {
-        padding: 0 1rem;
+        padding: 0;
     }
 
     .download-content {
-        padding: 0 1rem;
+        padding: 0;
     }
 
     .connect-content {
-        padding: 0 1rem;
+        padding: 0;
+    }
+
+    .section-title {
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
     }
 }
 
 @media (max-width: 480px) {
+    section {
+        padding: 30px 0;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .home-section {
+        padding: 70px 12px 25px;
+    }
+
+    .home-content {
+        padding: 0;
+    }
+
     .title {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+        padding: 0;
+        line-height: 1.2;
     }
 
     .subtitle {
-        font-size: 1rem;
-        padding: 0 1rem;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        padding: 0;
+        margin-bottom: 1.25rem;
+    }
+
+    .subtitle.typing {
+        font-size: 0.85rem;
     }
 
     .profile-image {
@@ -1231,59 +1362,110 @@ section {
         height: 150px;
     }
 
+    .profile-image-container {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .subtitle.typing {
+        font-size: 0.75rem;
+    }
+
+    .profile-image {
+        width: 130px;
+        height: 130px;
+    }
+
     .tech-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        gap: 1.25rem 0.75rem;
+        padding: 0.5rem 0;
+        justify-items: center;
+        margin-top: 1rem;
     }
 
     .tech-item {
-        padding: 1.5rem;
+        padding: 0.5rem;
     }
 
     .tech-item img {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
+    }
+
+    .tech-item span {
+        font-size: 0.8rem;
+    }
+
+    .projects-grid {
+        gap: 1rem;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .project-card {
+        border-radius: 15px;
+        min-height: 320px;
+    }
+
+    .project-image {
+        height: 180px;
+        min-height: 180px;
+    }
+
+    .project-content {
+        padding: 0.875rem;
+        height: auto;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+    }
+
+    .project-description {
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-github-link {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    .education-content {
+        gap: 0.875rem;
     }
 
     .education-image {
-        height: 140px;
+        height: 110px;
         width: 100%;
-        max-width: 140px;
+        max-width: 110px;
     }
 
     .education-image img {
         object-fit: contain;
     }
 
-    .project-image {
-        height: 200px;
-    }
-
-    .project-image img {
-        object-fit: cover;
-    }
-
-    .project-content {
-        padding: 1rem;
-    }
-
     .education-card {
-        padding: 1.5rem;
+        padding: 0.875rem;
     }
 
     .experience-card {
-        padding: 1.5rem;
-    }
-}
-
-@media (max-width: 360px) {
-    .education-image {
-        height: 150px;
-        max-width: 150px;
+        padding: 1rem;
     }
 
-    .project-image {
-        height: 180px;
+    .section-title {
+        font-size: 1.35rem;
+        margin-bottom: 1rem;
     }
 }
 
