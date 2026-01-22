@@ -2,10 +2,18 @@
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
+const body = document.body;
 
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
     hamburger.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (navMenu.classList.contains('active')) {
+        body.style.overflow = 'hidden';
+    } else {
+        body.style.overflow = '';
+    }
 });
 
 // Close menu when clicking on a link
@@ -13,7 +21,19 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
+        body.style.overflow = '';
     });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('active') && 
+        !navMenu.contains(e.target) && 
+        !hamburger.contains(e.target)) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        body.style.overflow = '';
+    }
 });
 
 // Smooth Scrolling for Navigation Links
@@ -274,6 +294,20 @@ function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
+
+// GitHub Link Hover - Remove background animations
+const githubLinks = document.querySelectorAll('.project-github-link');
+githubLinks.forEach(link => {
+    const projectCard = link.closest('.project-card');
+    
+    link.addEventListener('mouseenter', () => {
+        projectCard.classList.add('github-hovered');
+    });
+    
+    link.addEventListener('mouseleave', () => {
+        projectCard.classList.remove('github-hovered');
+    });
+});
 
 // Console Welcome Message
 console.log('%c👋 Welcome to My Portfolio!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
