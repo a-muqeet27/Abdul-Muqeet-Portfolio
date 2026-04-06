@@ -396,6 +396,14 @@ section {
     color: var(--text-light);
 }
 
+.experience-intro {
+    max-width: 760px;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    color: var(--text-gray);
+    font-size: 1.05rem;
+}
+
 .experience-content {
     max-width: 800px;
     margin: 0 auto;
@@ -403,31 +411,15 @@ section {
 
 .experience-card {
     background: var(--dark-card);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
-}
-
-.experience-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.experience-card:hover::before {
-    opacity: 1;
+    overflow: hidden;
+    position: relative;
 }
 
 .experience-card.animate {
@@ -436,23 +428,24 @@ section {
 }
 
 .experience-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
 }
 
-.experience-card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #00d4ff, #00ff88);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.experience-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--gradient);
+    transform: scaleY(0);
+    transition: transform 0.35s ease;
 }
 
-.experience-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-gray);
+.experience-card:hover::before {
+    transform: scaleY(1);
 }
 
 /* Technologies Section */
@@ -526,6 +519,129 @@ section {
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
+.experience-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding-bottom: 0.75rem;
+}
+
+.company-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 6px;
+    background-color: #fff;
+}
+
+.experience-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.experience-card-info h3 {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #ecf4ff;
+}
+
+.experience-company {
+    margin: 0;
+    color: #9bb0d6;
+    font-weight: 500;
+}
+
+.experience-date {
+    margin: 0.45rem 0 0;
+    display: inline-flex;
+    width: fit-content;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    color: #cde9ff;
+    background: rgba(0, 212, 255, 0.12);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    font-size: 0.9rem;
+}
+
+.experience-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 212, 255, 0.06);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    color: #d8f0ff;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.experience-toggle-btn:hover {
+    background: rgba(0, 212, 255, 0.14);
+    border-color: rgba(0, 212, 255, 0.45);
+    color: #ffffff;
+}
+
+.toggle-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+}
+
+.experience-description {
+    max-height: 420px;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.35s ease, margin 0.35s ease;
+    opacity: 1;
+    margin: 0.8rem 0 0;
+    padding-left: 1.25rem;
+    color: var(--text-gray);
+    line-height: 1.65;
+}
+
+.experience-description.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.experience-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+    max-height: 120px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.35s ease, margin-top 0.35s ease;
+}
+
+.experience-tag {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    color: #8df0ff;
+    background: rgba(0, 212, 255, 0.14);
+    border: 1px solid rgba(0, 212, 255, 0.28);
+}
+
+/* Show tags only when details are expanded */
+.experience-description.collapsed + .experience-tags {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+}
 
 /* Projects Section */
 .projects-section {
@@ -543,8 +659,8 @@ section {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.28) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -617,7 +733,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 255, 136, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.28) 0%, rgba(0, 212, 255, 0.28) 100%);
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 1;
@@ -696,7 +812,7 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 212, 255, 0.28) 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -794,6 +910,9 @@ section {
     font-weight: 500;
     transition: all 0.3s ease;
     display: inline-block;
+    color: #8df0ff;
+    background: rgba(0, 212, 255, 0.14);
+    border: 1px solid rgba(0, 212, 255, 0.28);
 }
 
 .tool-badge:hover {
@@ -1265,6 +1384,24 @@ section {
         padding: 1.25rem;
     }
 
+    .experience-intro {
+        font-size: 0.98rem;
+        margin-bottom: 1rem;
+        padding: 0 0.25rem;
+    }
+
+    .experience-card {
+        padding: 1rem;
+    }
+
+    .experience-card-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .experience-date {
+        font-size: 0.82rem;
+    }
+
     .education-image {
         width: 100%;
         max-width: 150px;
@@ -1363,6 +1500,19 @@ section {
 
     .profile-image-container {
         margin-bottom: 1rem;
+    }
+
+    .experience-card-header {
+        gap: 0.75rem;
+    }
+
+    .company-logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .experience-card-info h3 {
+        font-size: 1.12rem;
     }
 }
 

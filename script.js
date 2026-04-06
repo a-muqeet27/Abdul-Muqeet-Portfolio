@@ -15,7 +15,6 @@ hamburger.addEventListener('click', () => {
     }
 });
 
-
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
@@ -23,7 +22,6 @@ navLinks.forEach(link => {
         body.style.overflow = '';
     });
 });
-
 
 document.addEventListener('click', (e) => {
     if (navMenu.classList.contains('active') && 
@@ -40,7 +38,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offsetTop = target.offsetTop - 70; 
+            const offsetTop = target.offsetTop - 70;
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -116,7 +114,6 @@ downloadBtn.addEventListener('click', () => {
     }
 });
 
-
 const subtitle = document.querySelector('.subtitle');
 const homeSection = document.getElementById('home');
 let typingTimeout = null;
@@ -151,7 +148,6 @@ function resetTypingAnimation() {
             clearTimeout(typingTimeout);
         }
         
-        // Get original text
         const originalText = subtitle.getAttribute('data-text') || subtitle.textContent;
         if (!subtitle.getAttribute('data-text')) {
             subtitle.setAttribute('data-text', originalText);
@@ -252,13 +248,11 @@ techItems.forEach((item, index) => {
     observer.observe(item);
 });
 
-
 const projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach((card, index) => {
     card.style.transition = `opacity 0.8s ease ${index * 0.15}s, transform 0.8s ease ${index * 0.15}s`;
     observer.observe(card);
 });
-
 
 const educationCards = document.querySelectorAll('.education-card');
 educationCards.forEach((card, index) => {
@@ -266,13 +260,35 @@ educationCards.forEach((card, index) => {
     observer.observe(card);
 });
 
-
 const experienceCards = document.querySelectorAll('.experience-card');
 experienceCards.forEach(card => {
     card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
     observer.observe(card);
 });
 
+// ── Experience Toggle ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtns = document.querySelectorAll('.experience-toggle-btn');
+
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.experience-card');
+            const description = card ? card.querySelector('.experience-description') : null;
+            const icon = btn.querySelector('.toggle-icon');
+            if (!description) return;
+            const isCollapsed = description.classList.contains('collapsed');
+
+            if (isCollapsed) {
+                description.classList.remove('collapsed');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            } else {
+                description.classList.add('collapsed');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+});
+// ─────────────────────────────────────────────────────────────────────────────
 
 function typeWriter(element, text, speed = 100) {
     let i = 0;
@@ -360,4 +376,3 @@ githubLinks.forEach(link => {
 
 console.log('%c👋 Welcome to My Portfolio!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
 console.log('%cFeel free to explore the code and reach out if you have any questions!', 'color: #a0a0b0; font-size: 14px;');
-
