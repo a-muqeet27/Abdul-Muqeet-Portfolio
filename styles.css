@@ -504,6 +504,20 @@ section {
     opacity: 1;
 }
 
+.tech-item i {
+    font-size: 4rem;
+    color: var(--primary-color);
+    opacity: 0.7;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tech-item:hover i {
+    color: var(--secondary-color);
+    opacity: 1;
+    transform: scale(1.3) rotate(10deg);
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+}
+
 .tech-item span {
     font-size: 1rem;
     font-weight: 600;
@@ -898,7 +912,9 @@ section {
 .project-tools {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
 }
 
 .tool-badge {
@@ -918,6 +934,71 @@ section {
 .tool-badge:hover {
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+}
+
+.project-tools .tool-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-tools .tool-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 212, 255, 0.1);
+    transition: left 0.3s ease;
+    z-index: 0;
+}
+
+.project-tools .tool-item:hover {
+    transform: translateY(-5px) scale(1.1);
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+    background: rgba(0, 212, 255, 0.15);
+}
+
+.project-tools .tool-item:hover::before {
+    left: 100%;
+}
+
+.project-tools .tool-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0.95);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.project-tools .tool-item:hover img {
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+    transform: scale(1.15);
+}
+
+.project-tools .tool-item i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.project-tools .tool-item:hover i {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+    transform: scale(1.2);
 }
 
 /* Education Section */
@@ -1314,8 +1395,30 @@ section {
         height: 70px;
     }
 
+    .tech-item i {
+        font-size: 3rem;
+    }
+
     .tech-item span {
         font-size: 0.9rem;
+    }
+
+    .project-tools {
+        gap: 0.8rem;
+    }
+
+    .project-tools .tool-item {
+        width: 45px;
+        height: 45px;
+    }
+
+    .project-tools .tool-item img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .project-tools .tool-item i {
+        font-size: 1.6rem;
     }
 
     .projects-grid {
@@ -1514,6 +1617,24 @@ section {
     .experience-card-info h3 {
         font-size: 1.12rem;
     }
+
+    .project-tools {
+        gap: 0.6rem;
+    }
+
+    .project-tools .tool-item {
+        width: 42px;
+        height: 42px;
+    }
+
+    .project-tools .tool-item img {
+        width: 32px;
+        height: 32px;
+    }
+
+    .project-tools .tool-item i {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1551,8 +1672,30 @@ section {
         height: 55px;
     }
 
+    .tech-item i {
+        font-size: 2.2rem;
+    }
+
     .tech-item span {
         font-size: 0.8rem;
+    }
+
+    .project-tools {
+        gap: 0.5rem;
+    }
+
+    .project-tools .tool-item {
+        width: 38px;
+        height: 38px;
+    }
+
+    .project-tools .tool-item img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .project-tools .tool-item i {
+        font-size: 1.2rem;
     }
 
     .projects-grid {
