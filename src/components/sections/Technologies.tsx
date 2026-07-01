@@ -12,6 +12,7 @@ import {
   techCategories,
   type TechCategoryId,
 } from "@/data/portfolio";
+import { ease } from "@/lib/motion";
 
 function getCategoryCounts() {
   const counts: Record<string, number> = { all: technologies.length };
@@ -20,6 +21,16 @@ function getCategoryCounts() {
   });
   return counts;
 }
+
+const categoryLabels: Record<string, string> = {
+  all: "All Technologies",
+  mobile: "Mobile Development",
+  languages: "Programming Languages",
+  "ai-ml": "AI & Machine Learning",
+  backend: "Backend & APIs",
+  database: "Databases",
+  tools: "Tools & Platforms",
+};
 
 export function TechnologiesSection() {
   const [activeCategory, setActiveCategory] = useState<TechCategoryId>("all");
@@ -47,13 +58,13 @@ export function TechnologiesSection() {
         />
         <motion.div
           aria-hidden
-          className="absolute -left-32 top-1/4 h-64 w-64 rounded-full bg-primary/[0.03] blur-3xl"
+          className="absolute -left-32 top-1/4 h-64 w-64 rounded-full bg-primary/[0.04] blur-3xl"
           animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           aria-hidden
-          className="absolute -right-32 bottom-1/4 h-64 w-64 rounded-full bg-accent/[0.03] blur-3xl"
+          className="absolute -right-32 bottom-1/4 h-64 w-64 rounded-full bg-accent/[0.04] blur-3xl"
           animate={{ x: [0, -25, 0], y: [0, 25, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -69,46 +80,62 @@ export function TechnologiesSection() {
           counts={counts}
         />
 
-        <motion.p
-          key={activeCategory}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-6 text-center text-xs text-text-gray/70"
-        >
-          Showing {filtered.length} of {technologies.length}
-        </motion.p>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: ease.outExpo }}
+            className="mb-5 text-center"
+          >
+            <p className="text-sm font-medium text-text-light/80">
+              {categoryLabels[activeCategory] ?? activeCategory}
+            </p>
+            <p className="mt-0.5 text-xs text-text-gray/70">
+              Showing {filtered.length} of {technologies.length} skills
+            </p>
+          </motion.div>
+        </AnimatePresence>
 
         <motion.div
           layout
-          className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 sm:gap-x-4 sm:gap-y-8 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.map((tech) => (
+            {filtered.map((tech, i) => (
               <TechCard
                 key={tech.name}
                 name={tech.name}
                 image={tech.image}
                 category={tech.category}
+                index={i}
               />
             ))}
           </AnimatePresence>
         </motion.div>
 
-        {/* Infinite marquee of tech names */}
-        <div className="relative mt-14 overflow-hidden">
-          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-dark-bg to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-dark-bg to-transparent" />
-          <div className="flex animate-marquee gap-8 whitespace-nowrap">
+        <motion.div
+          className="relative mt-12 overflow-hidden sm:mt-14"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.8, ease: ease.outExpo }}
+        >
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-dark-bg to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-dark-bg to-transparent" />
+          <div className="flex animate-marquee gap-10 whitespace-nowrap py-2">
             {[...technologies, ...technologies].map((tech, i) => (
               <span
                 key={`${tech.name}-${i}`}
-                className="text-sm font-medium text-white/[0.08]"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white/[0.12] transition-colors hover:text-white/20"
               >
+                <span className="h-1 w-1 rounded-full bg-primary/30" />
                 {tech.name}
               </span>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </AnimatedSection>
   );
