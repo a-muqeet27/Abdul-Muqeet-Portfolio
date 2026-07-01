@@ -3,7 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Images, Expand } from "lucide-react";
+import {
+  ArrowUpRight,
+  Github,
+  Images,
+  Expand,
+  Sparkles,
+} from "lucide-react";
 import {
   AnimatedSection,
   SectionTitle,
@@ -11,7 +17,6 @@ import {
   StaggerItem,
   RevealOnScroll,
 } from "@/components/ui/AnimatedSection";
-import { Tag } from "@/components/ui/Tag";
 import { ProjectModal } from "@/components/sections/ProjectModal";
 import { featuredProject, projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
@@ -32,127 +37,123 @@ function ProjectCard({
   const imageLeft = index % 2 === 0;
   const slideFrom = imageLeft ? "left" : "right";
   const hasGallery = (project.gallery?.length ?? 0) > 1;
+  const visibleTools = project.tools.slice(0, featured ? 4 : 3);
+  const extraTools = project.tools.length - visibleTools.length;
 
   return (
-    <RevealOnScroll from={slideFrom} delay={featured ? 0 : 0.05}>
+    <RevealOnScroll from={slideFrom} delay={featured ? 0 : 0.04}>
       <motion.article
-        className="group relative overflow-hidden rounded-[15px] border border-white/[0.08] bg-dark-card shadow-card"
-        whileHover={{ y: -6 }}
+        className={cn(
+          "group relative overflow-hidden rounded-xl border bg-dark-card/80 shadow-card backdrop-blur-sm transition-colors duration-400",
+          featured
+            ? "border-primary/20"
+            : "border-white/[0.08] hover:border-white/[0.14]"
+        )}
+        whileHover={{ y: -4 }}
         transition={spring.gentle}
       >
         <span
           aria-hidden
-          className="absolute left-0 top-0 z-20 h-[2px] w-0 bg-gradient transition-all duration-700 ease-out group-hover:w-full"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         />
-        <span
-          aria-hidden
-          className="absolute bottom-0 left-0 top-0 z-20 w-[3px] origin-top scale-y-0 bg-gradient transition-transform duration-500 ease-out group-hover:scale-y-100"
-        />
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -right-20 -top-20 z-0 h-56 w-56 rounded-full bg-primary/[0.04] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
-        />
-
-        {featured && (
-          <span className="absolute left-4 top-4 z-20 rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-0.5 text-[10px] font-medium tracking-wide text-text-light backdrop-blur-sm">
-            Featured
-          </span>
-        )}
-
-        {project.badge && !featured && (
-          <span className="absolute left-4 top-4 z-20 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[10px] font-medium tracking-wide text-[#8df0ff] backdrop-blur-sm">
-            {project.badge}
-          </span>
-        )}
 
         <div
           className={cn(
-            "relative z-10 flex flex-col md:flex-row md:items-stretch",
-            !imageLeft && !featured && "md:flex-row-reverse"
+            "relative z-10 flex flex-col sm:flex-row sm:items-stretch",
+            !imageLeft && !featured && "sm:flex-row-reverse"
           )}
         >
-          <div className="relative h-[140px] w-full shrink-0 overflow-hidden sm:h-[180px] md:h-auto md:w-[38%] md:min-h-[220px] md:max-h-[260px]">
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={600}
-              height={400}
-              className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:brightness-[1.08]"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-dark-card/30 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40" />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent transition-transform duration-[900ms] ease-out group-hover:translate-x-full"
-            />
+          <div className="relative w-full shrink-0 sm:w-[34%] lg:w-[32%]">
+            <div className="relative h-[118px] overflow-hidden sm:h-full sm:min-h-[148px] sm:max-h-[168px]">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={480}
+                height={300}
+                className="h-full w-full object-cover transition-transform duration-600 ease-out group-hover:scale-[1.04]"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-card/80 via-transparent to-transparent sm:bg-gradient-to-r sm:from-dark-card/50" />
+
+              {(featured || project.badge) && (
+                <span
+                  className={cn(
+                    "absolute left-2.5 top-2.5 z-10 flex items-center gap-1 rounded-md px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide backdrop-blur-md",
+                    featured
+                      ? "border border-primary/30 bg-primary/15 text-[#8df0ff]"
+                      : "border border-accent/25 bg-accent/10 text-accent"
+                  )}
+                >
+                  {featured && <Sparkles className="h-2.5 w-2.5" />}
+                  {featured ? "Featured" : project.badge}
+                </span>
+              )}
+            </div>
           </div>
 
-          <div className="relative flex flex-1 flex-col justify-center border-t border-white/[0.06] p-3 sm:p-4 md:border-t-0 md:border-l md:border-white/[0.06] md:p-5">
-            <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
-              <div className="min-w-0">
-                <h3 className="text-base font-semibold text-text-light transition-all duration-300 group-hover:tracking-wide sm:text-lg md:text-xl">
-                  {project.title}
-                </h3>
-                <span
-                  aria-hidden
-                  className="mt-2 block h-px w-0 bg-gradient transition-all duration-500 ease-out group-hover:w-16"
-                />
-              </div>
-
+          <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-3.5 lg:p-4">
+            <div className="mb-1.5 flex items-start justify-between gap-2">
+              <h3 className="text-sm font-bold leading-snug text-text-light transition-colors duration-300 group-hover:text-primary sm:text-[15px] lg:text-base">
+                {project.title}
+              </h3>
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex w-full shrink-0 items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-text-light backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/[0.08] sm:w-auto sm:justify-start"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-text-light transition-colors hover:border-primary/30 hover:text-primary"
                 title="View on GitHub"
               >
-                <Github className="h-4 w-4" />
-                <span>GitHub</span>
-                <ArrowUpRight className="h-3.5 w-3.5 opacity-70" />
+                <Github className="h-3.5 w-3.5" />
               </a>
             </div>
 
-            <p className="mb-3 line-clamp-4 text-xs leading-relaxed text-text-gray sm:line-clamp-3 sm:text-sm">
+            <p className="mb-2.5 line-clamp-2 text-xs leading-relaxed text-text-gray sm:line-clamp-2 sm:text-[13px]">
               {project.description}
             </p>
 
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-wrap gap-2">
-                {project.tools.slice(0, 4).map((tool) => (
-                  <Tag key={tool}>{tool}</Tag>
-                ))}
-                {project.tools.length > 4 && (
-                  <span className="self-center text-xs text-text-gray">
-                    +{project.tools.length - 4} more
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <motion.button
-              type="button"
-              onClick={() => onOpen(project)}
-              className={cn(
-                "mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 sm:mt-4 sm:w-auto sm:justify-start",
-                hasGallery
-                  ? "border-primary/40 bg-primary/15 text-[#8df0ff] hover:border-primary/60 hover:bg-primary/25 hover:shadow-glow"
-                  : "border-white/15 bg-white/[0.06] text-text-light hover:border-white/30 hover:bg-white/10"
-              )}
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {hasGallery ? (
-                <Images className="h-4 w-4" />
-              ) : (
-                <Expand className="h-4 w-4" />
-              )}
-              {hasGallery ? "View Gallery" : "View Details"}
-              {hasGallery && (
-                <span className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[10px] font-bold">
-                  {project.gallery!.length}
+            <div className="mb-3 flex flex-wrap gap-1">
+              {visibleTools.map((tool) => (
+                <span
+                  key={tool}
+                  className="rounded border border-white/[0.06] bg-white/[0.03] px-1.5 py-px text-[10px] font-medium text-text-gray transition-colors group-hover:border-primary/15 group-hover:text-[#8df0ff]"
+                >
+                  {tool}
+                </span>
+              ))}
+              {extraTools > 0 && (
+                <span className="self-center text-[10px] text-text-gray/60">
+                  +{extraTools}
                 </span>
               )}
-            </motion.button>
+            </div>
+
+            <div className="mt-auto border-t border-white/[0.05] pt-2.5">
+              <motion.button
+                type="button"
+                onClick={() => onOpen(project)}
+                className={cn(
+                  "inline-flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all duration-300 sm:w-auto",
+                  hasGallery
+                    ? "bg-gradient text-white shadow-[0_2px_14px_rgba(0,212,255,0.2)] hover:shadow-[0_4px_18px_rgba(0,212,255,0.3)]"
+                    : "border border-primary/25 bg-primary/10 text-[#8df0ff] hover:bg-primary/18"
+                )}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {hasGallery ? (
+                  <Images className="h-3.5 w-3.5" />
+                ) : (
+                  <Expand className="h-3.5 w-3.5" />
+                )}
+                {hasGallery ? "Gallery" : "Details"}
+                {hasGallery && (
+                  <span className="rounded bg-white/20 px-1 py-px text-[9px] font-bold">
+                    {project.gallery!.length}
+                  </span>
+                )}
+                <ArrowUpRight className="h-3 w-3 opacity-60" />
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.article>
@@ -169,7 +170,7 @@ export function ProjectsSection() {
         <div className="container-main">
           <SectionTitle>Projects</SectionTitle>
 
-          <div className="mb-5">
+          <div className="mb-4">
             <ProjectCard
               project={featuredProject}
               index={0}
@@ -178,7 +179,7 @@ export function ProjectsSection() {
             />
           </div>
 
-          <StaggerContainer className="space-y-5">
+          <StaggerContainer className="space-y-3.5 sm:space-y-4">
             {projects.map((project, i) => (
               <StaggerItem key={project.title}>
                 <ProjectCard

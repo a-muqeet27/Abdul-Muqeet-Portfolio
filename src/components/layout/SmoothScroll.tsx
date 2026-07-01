@@ -21,27 +21,52 @@ export function useLenis() {
 
 const NAV_OFFSET = -80;
 
+function createLenisInstance() {
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reducedMotion) {
+    return null;
+  }
+
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+  if (isTouch) {
+    return new Lenis({
+      autoRaf: true,
+      autoResize: true,
+      lerp: 0.11,
+      smoothWheel: false,
+      syncTouch: true,
+      syncTouchLerp: 0.12,
+      touchMultiplier: 1.2,
+      anchors: { offset: NAV_OFFSET },
+    });
+  }
+
+  return new Lenis({
+    autoRaf: true,
+    autoResize: true,
+    lerp: 0.08,
+    smoothWheel: true,
+    wheelMultiplier: 0.85,
+    syncTouch: true,
+    syncTouchLerp: 0.1,
+    touchMultiplier: 1,
+    anchors: { offset: NAV_OFFSET },
+  });
+}
+
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    const instance = new Lenis({
-      autoRaf: true,
-      lerp: 0.1,
-      smoothWheel: true,
-      wheelMultiplier: 1.15,
-      touchMultiplier: 1.8,
-      syncTouch: true,
-      syncTouchLerp: 0.1,
-      anchors: {
-        offset: NAV_OFFSET,
-      },
-    });
-
+    const instance = createLenisInstance();
     setLenis(instance);
 
     return () => {
-      instance.destroy();
+      instance?.destroy();
       setLenis(null);
     };
   }, []);
@@ -62,7 +87,7 @@ export function scrollToSection(
   if (lenis) {
     lenis.scrollTo(el as HTMLElement, {
       offset,
-      duration: 1.1,
+      duration: 1.25,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
   } else {
