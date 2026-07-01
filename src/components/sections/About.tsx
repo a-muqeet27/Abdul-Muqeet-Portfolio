@@ -24,7 +24,7 @@ function StatCard({
 
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] px-6 py-5 text-center backdrop-blur-sm"
+      className="group relative min-w-0 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] px-3 py-4 text-center backdrop-blur-sm sm:px-6 sm:py-5"
       whileHover={{
         y: -4,
         borderColor: "rgba(255, 255, 255, 0.15)",
@@ -38,11 +38,11 @@ function StatCard({
       />
       <p
         ref={ref}
-        className="gradient-text text-3xl font-bold md:text-4xl"
+        className="gradient-text text-2xl font-bold sm:text-3xl md:text-4xl"
       >
         {display}
       </p>
-      <p className="mt-1 text-sm text-text-gray transition-colors duration-300 group-hover:text-text-dark">
+      <p className="mt-1 text-xs text-text-gray transition-colors duration-300 group-hover:text-text-dark sm:text-sm">
         {label}
       </p>
     </motion.div>
@@ -55,7 +55,7 @@ export function AboutSection() {
       <div className="container-main">
         <SectionTitle>About Me</SectionTitle>
 
-        <StaggerContainer className="mx-auto mb-12 grid max-w-3xl grid-cols-3 gap-4">
+        <StaggerContainer className="mx-auto mb-8 grid max-w-3xl grid-cols-3 gap-2 sm:mb-12 sm:gap-4">
           {aboutStats.map((stat) => (
             <StaggerItem key={stat.label}>
               <StatCard
@@ -71,7 +71,7 @@ export function AboutSection() {
           {aboutParagraphs.map((text, i) => (
             <StaggerItem key={i}>
               <motion.p
-                className="text-center text-base leading-relaxed text-text-gray md:text-lg"
+                className="text-center text-sm leading-relaxed text-text-gray sm:text-base md:text-lg"
                 whileHover={{ color: "#e0e0e0" }}
                 transition={{ duration: 0.35 }}
               >

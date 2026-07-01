@@ -32,7 +32,7 @@ export function TechCard({ name, image, category, isNew }: TechCardProps) {
       className="group relative flex flex-col items-center gap-3"
     >
       <motion.div
-        className="relative flex h-[88px] w-[88px] items-center justify-center"
+        className="relative flex h-[72px] w-[72px] items-center justify-center sm:h-[88px] sm:w-[88px]"
         whileHover={{ y: -6 }}
         transition={spring.gentle}
       >
@@ -51,7 +51,7 @@ export function TechCard({ name, image, category, isNew }: TechCardProps) {
         />
 
         <motion.div
-          className="relative z-10 flex h-14 w-14 items-center justify-center"
+          className="relative z-10 flex h-11 w-11 items-center justify-center sm:h-14 sm:w-14"
           whileHover={{ scale: 1.12, rotate: 4 }}
           transition={spring.snappy}
         >
@@ -61,7 +61,7 @@ export function TechCard({ name, image, category, isNew }: TechCardProps) {
             title={name}
             width={56}
             height={56}
-            className="h-12 w-12 object-contain opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:drop-shadow-[0_4px_16px_rgba(255,255,255,0.15)]"
+            className="h-10 w-10 object-contain opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:drop-shadow-[0_4px_16px_rgba(255,255,255,0.15)] sm:h-12 sm:w-12"
           />
         </motion.div>
 
@@ -73,7 +73,7 @@ export function TechCard({ name, image, category, isNew }: TechCardProps) {
       </motion.div>
 
       <div className="text-center">
-        <p className="text-sm font-medium text-text-gray transition-colors duration-300 group-hover:text-text-light">
+        <p className="text-xs font-medium text-text-gray transition-colors duration-300 group-hover:text-text-light sm:text-sm">
           {name}
         </p>
         <p className="mt-0.5 text-[10px] uppercase tracking-widest text-white/0 transition-all duration-300 group-hover:text-white/30">
@@ -98,7 +98,8 @@ export function TechFilterBar({
   counts: Record<string, number>;
 }) {
   return (
-    <div className="relative mb-10 flex flex-wrap justify-center gap-2">
+    <div className="relative -mx-4 mb-8 sm:mx-0 sm:mb-10">
+      <div className="scrollbar-hide flex gap-2 overflow-x-auto px-4 pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
       {categories.map((cat) => {
         const count = counts[cat.id] ?? 0;
         if (count === 0 && cat.id !== "all") return null;
@@ -110,7 +111,7 @@ export function TechFilterBar({
             type="button"
             onClick={() => onChange(cat.id)}
             className={cn(
-              "relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300",
+              "relative shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm",
               isActive ? "text-dark-bg" : "text-text-gray hover:text-text-light"
             )}
           >
@@ -137,6 +138,7 @@ export function TechFilterBar({
           </button>
         );
       })}
+      </div>
     </div>
   );
 }

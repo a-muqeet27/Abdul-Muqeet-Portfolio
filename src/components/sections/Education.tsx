@@ -20,16 +20,16 @@ export function EducationSection() {
           {education.map((item) => (
             <StaggerItem key={item.school}>
               <motion.div
-                className="card-base group flex flex-col gap-5 border-l-4 border-l-primary p-5 md:flex-row md:items-center md:gap-8 md:p-6"
+                className="card-base group flex flex-col gap-4 border-l-4 border-l-primary p-4 sm:gap-5 sm:p-5 md:flex-row md:items-center md:gap-8 md:p-6"
                 whileHover={{
-                  x: 10,
+                  y: -2,
                   borderLeftColor: "rgba(0, 245, 255, 0.8)",
                   boxShadow: "0 12px 45px rgba(0, 212, 255, 0.18)",
                 }}
                 transition={spring.gentle}
               >
                 <motion.div
-                  className="flex h-20 w-20 shrink-0 items-center justify-center md:h-24 md:w-24"
+                  className="flex h-16 w-16 shrink-0 items-center justify-center sm:h-20 sm:w-20 md:h-24 md:w-24"
                   whileHover={{ scale: 1.1, rotate: -3 }}
                   transition={spring.snappy}
                 >
@@ -41,20 +41,20 @@ export function EducationSection() {
                     className="h-full w-full object-contain transition-transform duration-500 ease-smooth"
                   />
                 </motion.div>
-                <div className="flex-1">
+                <div className="min-w-0 flex-1">
                   <motion.h3
-                    className="mb-2 text-lg font-semibold text-text-light md:text-xl"
+                    className="mb-2 text-base font-semibold text-text-light sm:text-lg md:text-xl"
                     initial={false}
                     whileHover={{ color: "#00d4ff" }}
                     transition={{ duration: 0.3 }}
                   >
                     {item.school}
                   </motion.h3>
-                  <p className="mb-1 text-primary transition-colors duration-300 group-hover:text-secondary">
+                  <p className="mb-1 text-sm text-primary transition-colors duration-300 group-hover:text-secondary sm:text-base">
                     {item.level}
                   </p>
-                  <p className="mb-1 text-text-gray">{item.year}</p>
-                  <p className="text-sm text-text-gray transition-colors duration-300 group-hover:text-text-dark md:text-base">
+                  <p className="mb-1 text-xs text-text-gray sm:text-sm">{item.year}</p>
+                  <p className="text-xs leading-relaxed text-text-gray transition-colors duration-300 group-hover:text-text-dark sm:text-sm md:text-base">
                     {item.marks}
                   </p>
                 </div>

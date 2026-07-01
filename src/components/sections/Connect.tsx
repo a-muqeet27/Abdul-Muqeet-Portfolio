@@ -41,7 +41,7 @@ export function ConnectSection() {
           Feel free to reach out! I&apos;m always open to discuss new projects,
           ideas, or opportunities.
         </FadeIn>
-        <StaggerContainer className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+        <StaggerContainer className="mx-auto grid max-w-sm grid-cols-1 gap-3 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-4 md:gap-6">
           {socialLinks.map((link) => {
             const Icon = iconMap[link.icon];
             return (
@@ -51,7 +51,7 @@ export function ConnectSection() {
                   target={link.icon === "mail" ? undefined : "_blank"}
                   rel={link.icon === "mail" ? undefined : "noopener noreferrer"}
                   title={link.label}
-                  className="card-base group inline-flex items-center gap-3 px-6 py-4 text-text-light"
+                  className="card-base group inline-flex w-full items-center justify-center gap-3 px-5 py-3.5 text-text-light sm:w-auto sm:px-6 sm:py-4"
                   whileHover={{
                     y: -6,
                     scale: 1.04,

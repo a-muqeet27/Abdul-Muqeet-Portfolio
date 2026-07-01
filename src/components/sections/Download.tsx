@@ -31,7 +31,7 @@ export function DownloadSection() {
           <motion.button
             type="button"
             onClick={handleDownload}
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient px-8 py-4 text-lg font-semibold text-white shadow-glow"
+            className="group relative inline-flex w-full max-w-xs items-center justify-center gap-3 overflow-hidden rounded-full bg-gradient px-6 py-3.5 text-base font-semibold text-white shadow-glow sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-lg"
             whileHover={{
               scale: 1.06,
               boxShadow: "0 0 40px rgba(0, 212, 255, 0.45)",

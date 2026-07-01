@@ -12,7 +12,7 @@ export function HomeSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-home-gradient bg-[length:200%_200%] px-5 pt-20 text-center text-text-light animate-gradient-shift"
+      className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-home-gradient bg-[length:200%_200%] px-4 pt-16 text-center text-text-light animate-gradient-shift sm:px-5 sm:pt-20"
     >
       <motion.div
         className="pointer-events-none absolute inset-0 opacity-60"
@@ -43,7 +43,7 @@ export function HomeSection() {
       >
         <motion.div variants={heroItem}>
           <motion.div
-            className="mx-auto mb-8 h-[200px] w-[200px] overflow-hidden rounded-full border-4 border-white/20 shadow-[0_10px_40px_rgba(0,0,0,0.4)] md:h-[250px] md:w-[250px]"
+            className="mx-auto mb-6 h-[150px] w-[150px] overflow-hidden rounded-full border-4 border-white/20 shadow-[0_10px_40px_rgba(0,0,0,0.4)] sm:mb-8 sm:h-[200px] sm:w-[200px] md:h-[250px] md:w-[250px]"
             animate={{ y: [0, -14, 0] }}
             transition={{
               y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
@@ -66,14 +66,14 @@ export function HomeSection() {
         </motion.div>
 
         <motion.h1
-          className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl"
+          className="mb-3 text-3xl font-bold sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl"
           variants={heroItem}
         >
           {site.name}
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-base leading-relaxed text-white/90 md:text-lg lg:text-xl"
+          className="mx-auto max-w-3xl px-1 text-sm leading-relaxed text-white/90 sm:text-base md:text-lg lg:text-xl"
           variants={heroItem}
         >
           {typedSubtitle}

@@ -17,7 +17,13 @@
 
 html {
   scroll-behavior: auto;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 72px;
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
 }
 
 body {
@@ -25,13 +31,24 @@ body {
   font-family: var(--font-geist-sans), "Segoe UI", Tahoma, sans-serif;
 }
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer components {
   .container-main {
-    @apply mx-auto w-full max-w-[1200px] px-5;
+    @apply mx-auto w-full max-w-[1200px] px-4 sm:px-5;
   }
 
   .section-padding {
-    @apply py-14 md:py-16;
+    @apply py-10 sm:py-14 md:py-16;
   }
 
   .glass-nav {
@@ -48,7 +65,7 @@ body {
   }
 
   .tag-pill {
-    @apply inline-flex rounded-full border border-primary/30 bg-primary/15 px-3 py-1.5 text-sm font-medium text-[#8df0ff];
+    @apply inline-flex rounded-full border border-primary/30 bg-primary/15 px-2.5 py-1 text-xs font-medium text-[#8df0ff] sm:px-3 sm:py-1.5 sm:text-sm;
     transition:
       transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -85,7 +102,7 @@ body {
   }
 
   .section-title {
-    @apply relative mb-10 w-full text-center text-3xl font-bold text-text-light md:text-4xl;
+    @apply relative mb-8 w-full text-center text-2xl font-bold text-text-light sm:mb-10 sm:text-3xl md:text-4xl;
   }
 
   /* section-title underline now animated via Framer Motion in SectionTitle */

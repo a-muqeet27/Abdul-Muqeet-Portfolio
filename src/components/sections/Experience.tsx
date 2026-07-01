@@ -24,16 +24,16 @@ function ExperienceCard({
 
   return (
     <motion.div
-      className="card-base group border-l-4 border-l-primary p-5 md:p-6"
+      className="card-base group border-l-4 border-l-primary p-4 sm:p-5 md:p-6"
       whileHover={{
-        x: 8,
+        y: -2,
         boxShadow: "0 12px 45px rgba(0, 212, 255, 0.18)",
         borderLeftColor: "rgba(0, 245, 255, 0.8)",
       }}
       transition={spring.gentle}
       layout
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3 sm:gap-4">
         <motion.div
           whileHover={{ scale: 1.08, rotate: 2 }}
           transition={spring.snappy}
@@ -43,15 +43,15 @@ function ExperienceCard({
             alt={`${item.company} Logo`}
             width={64}
             height={64}
-            className="h-14 w-14 shrink-0 rounded-lg object-contain md:h-16 md:w-16"
+            className="h-12 w-12 shrink-0 rounded-lg object-contain sm:h-14 sm:w-14 md:h-16 md:w-16"
           />
         </motion.div>
         <div className="min-w-0 flex-1">
-          <h3 className="text-lg font-semibold text-text-light md:text-xl">
+          <h3 className="text-base font-semibold text-text-light sm:text-lg md:text-xl">
             {item.role}
           </h3>
-          <p className="text-primary">{item.company}</p>
-          <p className="text-sm text-text-gray">{item.date}</p>
+          <p className="text-sm text-primary sm:text-base">{item.company}</p>
+          <p className="text-xs text-text-gray sm:text-sm">{item.date}</p>
         </div>
         <motion.button
           type="button"
@@ -140,7 +140,7 @@ export function ExperienceSection() {
     <AnimatedSection id="experience" className="section-padding bg-dark-bg">
       <div className="container-main">
         <SectionTitle>Experience</SectionTitle>
-        <FadeIn className="mb-8 text-center text-text-gray">
+        <FadeIn className="mb-6 px-1 text-center text-sm text-text-gray sm:mb-8 sm:text-base">
           {experience.intro}
         </FadeIn>
         <StaggerContainer className="space-y-6">

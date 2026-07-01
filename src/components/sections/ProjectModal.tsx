@@ -60,7 +60,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
     <AnimatePresence>
       {project && (
         <motion.div
-          className="fixed inset-0 z-[1100] flex items-center justify-center p-4 md:p-6"
+          className="fixed inset-0 z-[1100] flex items-end justify-center p-0 sm:items-center sm:p-4 md:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -80,7 +80,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-modal-title"
-            className="relative z-10 flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-dark-card shadow-[0_24px_80px_rgba(0,0,0,0.6)]"
+            className="relative z-10 flex max-h-[92dvh] w-full max-w-4xl flex-col overflow-hidden rounded-t-2xl border border-white/10 bg-dark-card shadow-[0_24px_80px_rgba(0,0,0,0.6)] sm:max-h-[92vh] sm:rounded-2xl"
             initial={{ opacity: 0, y: 32, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.98 }}
@@ -181,9 +181,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
 
               {/* Details */}
-              <div className="p-5 md:p-6">
-                <div className="mb-4 flex flex-wrap items-start justify-between gap-3 pr-8">
-                  <div>
+              <div className="p-4 sm:p-5 md:p-6">
+                <div className="mb-4 flex flex-col gap-3 pr-8 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
+                  <div className="min-w-0">
                     {project.badge && (
                       <span className="mb-2 inline-block rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[#8df0ff]">
                         {project.badge}
@@ -191,7 +191,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     )}
                     <h2
                       id="project-modal-title"
-                      className="text-xl font-bold text-text-light md:text-2xl"
+                      className="text-lg font-bold text-text-light sm:text-xl md:text-2xl"
                     >
                       {project.title}
                     </h2>
@@ -200,7 +200,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-105"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient px-4 py-2 text-sm font-medium text-white shadow-glow transition-transform hover:scale-105 sm:w-auto"
                   >
                     <Github className="h-4 w-4" />
                     View on GitHub

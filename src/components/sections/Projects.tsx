@@ -71,7 +71,7 @@ function ProjectCard({
             !imageLeft && !featured && "md:flex-row-reverse"
           )}
         >
-          <div className="relative h-[160px] w-full shrink-0 overflow-hidden sm:h-[180px] md:h-auto md:w-[38%] md:min-h-[220px] md:max-h-[260px]">
+          <div className="relative h-[140px] w-full shrink-0 overflow-hidden sm:h-[180px] md:h-auto md:w-[38%] md:min-h-[220px] md:max-h-[260px]">
             <Image
               src={project.image}
               alt={project.title}
@@ -86,10 +86,10 @@ function ProjectCard({
             />
           </div>
 
-          <div className="relative flex flex-1 flex-col justify-center border-t border-white/[0.06] p-4 md:border-t-0 md:border-l md:border-white/[0.06] md:p-5">
-            <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
-              <div>
-                <h3 className="text-lg font-semibold text-text-light transition-all duration-300 group-hover:tracking-wide md:text-xl">
+          <div className="relative flex flex-1 flex-col justify-center border-t border-white/[0.06] p-3 sm:p-4 md:border-t-0 md:border-l md:border-white/[0.06] md:p-5">
+            <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between">
+              <div className="min-w-0">
+                <h3 className="text-base font-semibold text-text-light transition-all duration-300 group-hover:tracking-wide sm:text-lg md:text-xl">
                   {project.title}
                 </h3>
                 <span
@@ -103,7 +103,7 @@ function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-text-light backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/[0.08]"
+                className="inline-flex w-full shrink-0 items-center justify-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-text-light backdrop-blur-sm transition-all duration-300 hover:border-white/25 hover:bg-white/[0.08] sm:w-auto sm:justify-start"
                 title="View on GitHub"
               >
                 <Github className="h-4 w-4" />
@@ -112,7 +112,7 @@ function ProjectCard({
               </a>
             </div>
 
-            <p className="mb-3 line-clamp-3 text-sm leading-relaxed text-text-gray">
+            <p className="mb-3 line-clamp-4 text-xs leading-relaxed text-text-gray sm:line-clamp-3 sm:text-sm">
               {project.description}
             </p>
 
@@ -133,7 +133,7 @@ function ProjectCard({
               type="button"
               onClick={() => onOpen(project)}
               className={cn(
-                "mt-4 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300",
+                "mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 sm:mt-4 sm:w-auto sm:justify-start",
                 hasGallery
                   ? "border-primary/40 bg-primary/15 text-[#8df0ff] hover:border-primary/60 hover:bg-primary/25 hover:shadow-glow"
                   : "border-white/15 bg-white/[0.06] text-text-light hover:border-white/30 hover:bg-white/10"

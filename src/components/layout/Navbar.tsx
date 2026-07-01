@@ -84,7 +84,7 @@ export function Navbar() {
   return (
     <motion.nav
       className={cn(
-        "glass-nav fixed top-0 z-[1000] w-full py-4",
+        "glass-nav fixed top-0 z-[1000] w-full py-3 sm:py-4",
         scrolled ? "shadow-[0_4px_30px_rgba(0,0,0,0.5)]" : "shadow-[0_2px_20px_rgba(0,0,0,0.3)]"
       )}
     >
@@ -95,7 +95,7 @@ export function Navbar() {
             e.preventDefault();
             handleNavClick("#home");
           }}
-          className="gradient-text text-2xl font-bold"
+          className="gradient-text text-xl font-bold sm:text-2xl"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
           transition={spring.snappy}
@@ -172,7 +172,7 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 top-[65px] z-[999] overflow-y-auto bg-[rgba(10,10,15,0.97)] lg:hidden"
+            className="fixed inset-0 top-[56px] z-[999] overflow-y-auto bg-[rgba(10,10,15,0.97)] sm:top-[65px] lg:hidden"
             initial="hidden"
             animate="visible"
             exit="exit"

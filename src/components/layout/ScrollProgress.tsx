@@ -56,7 +56,7 @@ export function BackToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label="Scroll to top"
-      className="fixed bottom-6 right-6 z-[999] flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-dark-card/90 text-primary shadow-glow backdrop-blur-md"
+      className="fixed bottom-4 right-4 z-[999] flex h-11 w-11 items-center justify-center rounded-full border border-primary/30 bg-dark-card/90 text-primary shadow-glow backdrop-blur-md sm:bottom-6 sm:right-6 sm:h-12 sm:w-12"
       initial={{ opacity: 0, y: 20, scale: 0.8 }}
       animate={{
         opacity: visible ? 1 : 0,

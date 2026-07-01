@@ -85,9 +85,9 @@ export function SectionTitle({ children }: { children: React.ReactNode }) {
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
-    <div ref={ref} className="relative mb-10 w-full text-center">
+    <div ref={ref} className="relative mb-8 w-full text-center sm:mb-10">
       <motion.h2
-        className="text-3xl font-bold text-text-light md:text-4xl"
+        className="text-2xl font-bold text-text-light sm:text-3xl md:text-4xl"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={titleReveal}
