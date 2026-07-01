@@ -15,57 +15,57 @@ export type Project = {
 };
 
 export const featuredProject: Project = {
-  title: "Drowsiness Detection Model",
-  image: "/images/Drowsiness Detection Model.png",
-  github: "https://github.com/a-muqeet27/Drowsiness-Detection-Model.git",
+  title: "Alert Mate",
+  image: "/images/Alert Mate.jpeg",
+  github: "https://github.com/a-muqeet27/Alert-Mate-FYP.git",
   description:
-    "A Drowsiness Detection Model uses Computer Vision and Machine Learning techniques to monitor eye-closure and yawning in real time to identify signs of drowsiness.",
-  tools: [
-    "Python",
-    "OpenCV",
-    "TensorFlow",
-    "Keras",
-    "PyTorch",
-    "NumPy",
-    "Pandas",
-  ],
+    "My Final Year Project — a Drowsiness Detection System using a mobile application and integrated model that detects drowsiness using facial landmarks techniques.",
+  tools: ["Flutter", "Firebase", "FastAPI", "Python", "OpenCV", "PyTorch"],
+  badge: "FINAL YEAR PROJECT",
   gallery: [
     {
+      src: "/images/Alert Mate.jpeg",
+      caption: "Alert Mate Mobile Application",
+    },
+    {
       src: "/images/Drowsiness Detection Model.png",
-      caption: "Drowsiness Detection Model Architecture",
+      caption: "Integrated Drowsiness Detection Model",
     },
   ],
   highlights: [
-    "Real-time eye-closure and yawning monitoring",
-    "Computer vision and machine learning based detection",
-    "Built with OpenCV, TensorFlow, Keras, and PyTorch",
+    "Mobile application for drowsiness detection",
+    "Integrated model using facial landmarks techniques",
+    "Flutter frontend with Firebase backend integration",
+    "FastAPI and Python for model serving and processing",
   ],
 };
 
 export const projects: Project[] = [
   {
-    title: "Alert Mate",
-    image: "/images/Alert Mate.jpeg",
-    github: "https://github.com/a-muqeet27/Alert-Mate-FYP.git",
+    title: "Drowsiness Detection Model",
+    image: "/images/Drowsiness Detection Model.png",
+    github: "https://github.com/a-muqeet27/Drowsiness-Detection-Model.git",
     description:
-      "My Final Year Project of Drowsiness Detection System using Mobile Application and Integrated Model that detects drowsiness using Facial Landmarks Techniques.",
-    tools: ["Flutter", "Firebase", "FastAPI", "Python", "OpenCV", "PyTorch"],
-    badge: "Final Year Project",
+      "A Drowsiness Detection Model uses Computer Vision and Machine Learning techniques to monitor eye-closure and yawning in real time to identify signs of drowsiness.",
+    tools: [
+      "Python",
+      "OpenCV",
+      "TensorFlow",
+      "Keras",
+      "PyTorch",
+      "NumPy",
+      "Pandas",
+    ],
     gallery: [
       {
-        src: "/images/Alert Mate.jpeg",
-        caption: "Alert Mate Mobile Application",
-      },
-      {
         src: "/images/Drowsiness Detection Model.png",
-        caption: "Integrated Drowsiness Detection Model",
+        caption: "Drowsiness Detection Model Architecture",
       },
     ],
     highlights: [
-      "Mobile application for drowsiness detection",
-      "Integrated model using facial landmarks techniques",
-      "Flutter frontend with Firebase backend integration",
-      "FastAPI and Python for model serving and processing",
+      "Real-time eye-closure and yawning monitoring",
+      "Computer vision and machine learning based detection",
+      "Built with OpenCV, TensorFlow, Keras, and PyTorch",
     ],
   },
   {

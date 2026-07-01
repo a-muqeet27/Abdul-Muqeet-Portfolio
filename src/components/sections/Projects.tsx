@@ -74,17 +74,10 @@ function ProjectCard({
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-card/80 via-transparent to-transparent sm:bg-gradient-to-r sm:from-dark-card/50" />
 
-              {(featured || project.badge) && (
-                <span
-                  className={cn(
-                    "absolute left-2.5 top-2.5 z-10 flex items-center gap-1 rounded-md px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide backdrop-blur-md",
-                    featured
-                      ? "border border-primary/30 bg-primary/15 text-[#8df0ff]"
-                      : "border border-accent/25 bg-accent/10 text-accent"
-                  )}
-                >
-                  {featured && <Sparkles className="h-2.5 w-2.5" />}
-                  {featured ? "Featured" : project.badge}
+              {featured && !project.badge && (
+                <span className="absolute left-2.5 top-2.5 z-10 flex items-center gap-1 rounded-md border border-primary/30 bg-primary/15 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#8df0ff] backdrop-blur-md">
+                  <Sparkles className="h-2.5 w-2.5" />
+                  Featured
                 </span>
               )}
             </div>
@@ -92,18 +85,26 @@ function ProjectCard({
 
           <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-3.5 lg:p-4">
             <div className="mb-1.5 flex items-start justify-between gap-2">
-              <h3 className="text-sm font-bold leading-snug text-text-light transition-colors duration-300 group-hover:text-primary sm:text-[15px] lg:text-base">
-                {project.title}
-              </h3>
+              <div className="min-w-0 flex-1">
+                {project.badge && (
+                  <span className="mb-1.5 inline-flex items-center rounded-md border border-accent/35 bg-accent/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent sm:text-[11px]">
+                    {project.badge}
+                  </span>
+                )}
+                <h3 className="text-sm font-bold leading-snug text-text-light transition-colors duration-300 group-hover:text-primary sm:text-[15px] lg:text-base">
+                  {project.title}
+                </h3>
+              </div>
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-text-light transition-colors hover:border-primary/30 hover:text-primary"
+                className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 text-text-light transition-colors hover:border-primary/30 hover:bg-white/[0.07] hover:text-primary sm:px-3"
                 title="View on GitHub"
               >
-                <Github className="h-3.5 w-3.5" />
+                <Github className="h-4 w-4" />
+                <span className="hidden text-xs font-medium sm:inline">GitHub</span>
               </a>
             </div>
 
