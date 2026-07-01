@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #00d4ff;
+  --secondary-color: #00f5ff;
+  --accent-color: #00ff88;
+  --dark-bg: #0a0a0f;
+  --dark-card: #1a1a2e;
+  --dark-card-hover: #252540;
+  --light-bg: #0f0f1a;
+  --text-light: #ffffff;
+  --text-dark: #e0e0e0;
+  --text-gray: #a0a0b0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-light-bg text-text-dark antialiased overflow-x-hidden;
+  font-family: var(--font-geist-sans), "Segoe UI", Tahoma, sans-serif;
+}
+
+@layer components {
+  .container-main {
+    @apply mx-auto w-full max-w-[1200px] px-5;
+  }
+
+  .section-padding {
+    @apply py-14 md:py-16;
+  }
+
+  .glass-nav {
+    @apply border-b border-white/10 bg-[rgba(10,10,15,0.92)] backdrop-blur-xl;
+  }
+
+  .card-base {
+    @apply rounded-[15px] border border-white/10 bg-dark-card shadow-card;
+    transition:
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.4s ease;
+  }
+
+  .tag-pill {
+    @apply inline-flex rounded-full border border-primary/30 bg-primary/15 px-3 py-1.5 text-sm font-medium text-[#8df0ff];
+    transition:
+      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .tag-pill:hover {
+    @apply scale-105 shadow-glow;
+  }
+
+  .smooth-hover {
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-1.5 left-0 h-0.5 w-0 rounded-full bg-gradient;
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-underline:hover::after,
+  .link-underline.active::after {
+    @apply w-full;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-primary to-accent bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  .section-title {
+    @apply relative mb-10 w-full text-center text-3xl font-bold text-text-light md:text-4xl;
+  }
+
+  /* section-title underline now animated via Framer Motion in SectionTitle */
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
