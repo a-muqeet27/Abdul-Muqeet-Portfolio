@@ -9,7 +9,7 @@ export function useAnimatedCounter(
   decimals = 0
 ) {
   const ref = useRef<HTMLParagraphElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
+  const isInView = useInView(ref, { once: false, margin: "-12% 0px" });
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -20,8 +20,10 @@ export function useAnimatedCounter(
 
     let start: number | null = null;
     let frame: number;
+    let cancelled = false;
 
     const step = (timestamp: number) => {
+      if (cancelled) return;
       if (start === null) start = timestamp;
       const progress = Math.min((timestamp - start) / (duration * 1000), 1);
       const eased = 1 - Math.pow(1 - progress, 3);
@@ -33,7 +35,10 @@ export function useAnimatedCounter(
     };
 
     frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(frame);
+    };
   }, [isInView, target, duration]);
 
   const display =

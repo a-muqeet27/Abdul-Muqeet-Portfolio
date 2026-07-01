@@ -131,12 +131,25 @@ export const titleReveal: Variants = {
 };
 
 export const underlineReveal: Variants = {
-  hidden: { scaleX: 0, opacity: 0 },
+  hidden: { opacity: 0, scale: 0.85 },
   visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7, ease: ease.outExpo, delay: 0.25 },
+  },
+};
+
+export const underlineLineReveal: Variants = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: (fromLeft: boolean) => ({
     scaleX: 1,
     opacity: 1,
-    transition: { duration: 0.8, ease: ease.outExpo, delay: 0.2 },
-  },
+    transition: {
+      duration: 0.65,
+      ease: ease.outExpo,
+      delay: fromLeft ? 0.35 : 0.4,
+    },
+  }),
 };
 
 export const accordionContent: Variants = {

@@ -8,6 +8,7 @@ import {
   staggerItem,
   titleReveal,
   underlineReveal,
+  underlineLineReveal,
   ease,
   duration,
 } from "@/lib/motion";
@@ -82,7 +83,7 @@ export function StaggerItem({
 
 export function SectionTitle({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const isInView = useInView(ref, { once: false, margin: "-10% 0px" });
 
   return (
     <div ref={ref} className="relative mb-8 w-full text-center sm:mb-10">
@@ -94,12 +95,33 @@ export function SectionTitle({ children }: { children: React.ReactNode }) {
       >
         {children}
       </motion.h2>
-      <motion.span
-        className="absolute -bottom-2 left-1/2 block h-1 w-24 origin-center -translate-x-1/2 rounded-full bg-gradient"
+
+      <motion.div
+        className="mt-4 flex items-center justify-center gap-2 sm:mt-5 sm:gap-3"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={underlineReveal}
-      />
+        aria-hidden
+      >
+        <motion.span
+          className="h-px w-10 origin-right rounded-full bg-gradient-to-r from-transparent via-primary/50 to-primary sm:w-14"
+          custom={true}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={underlineLineReveal}
+        />
+        <span className="relative flex h-2 w-2 items-center justify-center sm:h-2.5 sm:w-2.5">
+          <span className="absolute inset-0 rounded-full bg-primary/25 blur-[3px]" />
+          <span className="relative h-1.5 w-1.5 rounded-full bg-gradient shadow-[0_0_10px_rgba(0,212,255,0.45)] sm:h-2 sm:w-2" />
+        </span>
+        <motion.span
+          className="h-px w-10 origin-left rounded-full bg-gradient-to-l from-transparent via-accent/50 to-accent sm:w-14"
+          custom={false}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={underlineLineReveal}
+        />
+      </motion.div>
     </div>
   );
 }

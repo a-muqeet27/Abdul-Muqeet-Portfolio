@@ -111,8 +111,6 @@ body {
   .section-title {
     @apply relative mb-8 w-full text-center text-2xl font-bold text-text-light sm:mb-10 sm:text-3xl md:text-4xl;
   }
-
-  /* section-title underline now animated via Framer Motion in SectionTitle */
 }
 
 /* Lenis — base styles imported from lenis/dist/lenis.css */
