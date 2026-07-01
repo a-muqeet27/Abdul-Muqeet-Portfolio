@@ -111,7 +111,7 @@ export const techCategories = [
 export type TechCategoryId = (typeof techCategories)[number]["id"];
 
 export const aboutStats = [
-  { label: "Projects Built", value: 7, decimals: 0 },
+  { label: "Projects Built", value: 17, decimals: 0 },
   { label: "Technologies", value: technologies.length, decimals: 0 },
   { label: "CGPA", value: 3.19, decimals: 2 },
 ] as const;
