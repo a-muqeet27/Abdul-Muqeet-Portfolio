@@ -98,8 +98,13 @@ export function TechFilterBar({
   counts: Record<string, number>;
 }) {
   return (
-    <div className="relative -mx-4 mb-8 sm:mx-0 sm:mb-10">
-      <div className="scrollbar-hide flex gap-2 overflow-x-auto px-4 pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0">
+    <div className="relative mb-8 sm:mb-10">
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-6 bg-gradient-to-r from-dark-bg to-transparent lg:hidden" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-8 bg-gradient-to-l from-dark-bg to-transparent lg:hidden" />
+      <div
+        className="scroll-touch-x scrollbar-hide -mx-4 flex flex-nowrap gap-2 px-4 pb-2 pr-6 lg:mx-0 lg:flex-wrap lg:justify-center lg:overflow-visible lg:px-0 lg:pr-0"
+        data-lenis-prevent
+      >
       {categories.map((cat) => {
         const count = counts[cat.id] ?? 0;
         if (count === 0 && cat.id !== "all") return null;

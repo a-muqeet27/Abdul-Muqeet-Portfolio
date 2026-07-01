@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import {
   AnimatedSection,
   SectionTitle,
@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/AnimatedSection";
 import { socialLinks } from "@/data/portfolio";
 import { spring } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -32,44 +33,97 @@ const iconMap = {
   whatsapp: WhatsAppIcon,
 } as const;
 
+const socialStyles = {
+  github: {
+    iconBg: "from-[#2d2d3a] to-[#161622]",
+    iconColor: "text-white",
+    glow: "group-hover:shadow-[0_12px_40px_rgba(255,255,255,0.12)]",
+    border: "group-hover:border-white/25",
+    accent: "group-hover:text-white",
+  },
+  linkedin: {
+    iconBg: "from-[#0077b5] to-[#004e7a]",
+    iconColor: "text-white",
+    glow: "group-hover:shadow-[0_12px_40px_rgba(0,119,181,0.35)]",
+    border: "group-hover:border-[#0077b5]/50",
+    accent: "group-hover:text-[#5eb8f0]",
+  },
+  mail: {
+    iconBg: "from-primary to-[#0066ff]",
+    iconColor: "text-white",
+    glow: "group-hover:shadow-[0_12px_40px_rgba(0,212,255,0.35)]",
+    border: "group-hover:border-primary/50",
+    accent: "group-hover:text-primary",
+  },
+  whatsapp: {
+    iconBg: "from-[#25D366] to-[#128C7E]",
+    iconColor: "text-white",
+    glow: "group-hover:shadow-[0_12px_40px_rgba(37,211,102,0.35)]",
+    border: "group-hover:border-[#25D366]/50",
+    accent: "group-hover:text-[#5ee89a]",
+  },
+} as const;
+
 export function ConnectSection() {
   return (
     <AnimatedSection id="connect" className="section-padding bg-dark-bg">
       <div className="container-main text-center">
         <SectionTitle>Let&apos;s Connect</SectionTitle>
-        <FadeIn className="mx-auto mb-10 max-w-xl text-text-gray">
+        <FadeIn className="mx-auto mb-8 max-w-xl px-2 text-sm text-text-gray sm:mb-10 sm:text-base">
           Feel free to reach out! I&apos;m always open to discuss new projects,
           ideas, or opportunities.
         </FadeIn>
-        <StaggerContainer className="mx-auto grid max-w-sm grid-cols-1 gap-3 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-4 md:gap-6">
+
+        <StaggerContainer className="mx-auto grid max-w-lg grid-cols-2 gap-3 sm:max-w-2xl sm:gap-4 md:flex md:max-w-none md:flex-wrap md:items-stretch md:justify-center md:gap-5">
           {socialLinks.map((link) => {
             const Icon = iconMap[link.icon];
+            const style = socialStyles[link.icon];
+
             return (
-              <StaggerItem key={link.label}>
+              <StaggerItem key={link.label} className="md:flex-1 md:max-w-[220px]">
                 <motion.a
                   href={link.href}
                   target={link.icon === "mail" ? undefined : "_blank"}
                   rel={link.icon === "mail" ? undefined : "noopener noreferrer"}
                   title={link.label}
-                  className="card-base group inline-flex w-full items-center justify-center gap-3 px-5 py-3.5 text-text-light sm:w-auto sm:px-6 sm:py-4"
-                  whileHover={{
-                    y: -6,
-                    scale: 1.04,
-                    borderColor: "rgba(0, 212, 255, 0.45)",
-                    boxShadow: "0 12px 35px rgba(0, 212, 255, 0.22)",
-                  }}
-                  whileTap={{ scale: 0.97 }}
+                  className={cn(
+                    "group relative flex h-full min-h-[132px] flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-4 text-text-light backdrop-blur-sm transition-all duration-300 sm:min-h-[148px] sm:gap-3.5 sm:p-5",
+                    style.glow,
+                    style.border
+                  )}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   transition={spring.gentle}
                 >
-                  <motion.span
-                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.15 }}
-                    transition={{ duration: 0.4 }}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+
+                  <div
+                    className={cn(
+                      "relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br shadow-lg sm:h-14 sm:w-14",
+                      style.iconBg
+                    )}
                   >
-                    <Icon className="h-5 w-5 text-primary" />
-                  </motion.span>
-                  <span className="font-medium transition-colors duration-300 group-hover:text-primary">
-                    {link.label}
-                  </span>
+                    <Icon className={cn("h-5 w-5 sm:h-6 sm:w-6", style.iconColor)} />
+                  </div>
+
+                  <div className="relative text-center">
+                    <p
+                      className={cn(
+                        "text-sm font-semibold transition-colors duration-300 sm:text-base",
+                        style.accent
+                      )}
+                    >
+                      {link.label}
+                    </p>
+                    <p className="mt-0.5 text-[10px] uppercase tracking-wider text-text-gray/70 sm:text-[11px]">
+                      {link.icon === "mail" ? "Send a message" : "Tap to open"}
+                    </p>
+                  </div>
+
+                  <ArrowUpRight className="absolute right-3 top-3 h-3.5 w-3.5 text-white/20 transition-all duration-300 group-hover:text-white/60 sm:right-3.5 sm:top-3.5" />
                 </motion.a>
               </StaggerItem>
             );

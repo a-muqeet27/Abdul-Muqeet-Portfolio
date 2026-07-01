@@ -33,30 +33,31 @@ export function TechnologiesSection() {
   return (
     <AnimatedSection
       id="technologies"
-      className="section-padding relative overflow-hidden bg-dark-bg"
+      className="section-padding relative bg-dark-bg"
     >
-      {/* Ambient background grid */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(0,212,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -left-32 top-1/4 h-64 w-64 rounded-full bg-primary/[0.03] blur-3xl"
-        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute -right-32 bottom-1/4 h-64 w-64 rounded-full bg-accent/[0.03] blur-3xl"
-        animate={{ x: [0, -25, 0], y: [0, 25, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.35]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(0,212,255,0.06) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+        <motion.div
+          aria-hidden
+          className="absolute -left-32 top-1/4 h-64 w-64 rounded-full bg-primary/[0.03] blur-3xl"
+          animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          aria-hidden
+          className="absolute -right-32 bottom-1/4 h-64 w-64 rounded-full bg-accent/[0.03] blur-3xl"
+          animate={{ x: [0, -25, 0], y: [0, 25, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
       <div className="container-main relative z-10">
         <SectionTitle>Technologies & Tools</SectionTitle>
