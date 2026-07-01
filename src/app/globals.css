@@ -16,7 +16,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -90,7 +91,7 @@ body {
   /* section-title underline now animated via Framer Motion in SectionTitle */
 }
 
-/* Lenis */
+/* Lenis — base styles imported from lenis/dist/lenis.css */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -106,8 +107,4 @@ html.lenis body {
 
 .lenis.lenis-stopped {
   overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
 }

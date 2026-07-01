@@ -48,21 +48,26 @@ const menuItemVariants = {
 export function Navbar() {
   const { lenis } = useLenis();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
-    const onScroll = () => {
-      const currentY = window.scrollY;
+    const handleScroll = (currentY: number) => {
       setScrolled(currentY > 20);
-      setHidden(currentY > lastScrollY && currentY > 100);
-      setLastScrollY(currentY);
     };
+
+    if (lenis) {
+      const onLenisScroll = (instance: typeof lenis) => {
+        handleScroll(instance.scroll);
+      };
+      lenis.on("scroll", onLenisScroll);
+      return () => lenis.off("scroll", onLenisScroll);
+    }
+
+    const onScroll = () => handleScroll(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [lastScrollY]);
+  }, [lenis]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -82,9 +87,6 @@ export function Navbar() {
         "glass-nav fixed top-0 z-[1000] w-full py-4",
         scrolled ? "shadow-[0_4px_30px_rgba(0,0,0,0.5)]" : "shadow-[0_2px_20px_rgba(0,0,0,0.3)]"
       )}
-      initial={{ y: 0 }}
-      animate={{ y: hidden ? -100 : 0 }}
-      transition={spring.gentle}
     >
       <div className="container-main flex items-center justify-between">
         <motion.a

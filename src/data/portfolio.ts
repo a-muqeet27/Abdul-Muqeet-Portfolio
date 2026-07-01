@@ -67,97 +67,54 @@ export const experience = {
   ],
 };
 
-export const featuredProject = {
-  title: "Drowsiness Detection Model",
-  image: "/images/Drowsiness Detection Model.png",
-  github: "https://github.com/a-muqeet27/Drowsiness-Detection-Model.git",
-  description:
-    "A Drowsiness Detection Model uses Computer Vision and Machine Learning techniques to monitor eye-closure and yawning in real time to identify signs of drowsiness.",
-  tools: [
-    "Python",
-    "OpenCV",
-    "TensorFlow",
-    "Keras",
-    "PyTorch",
-    "NumPy",
-    "Pandas",
-  ],
-};
-
-export const projects = [
-  {
-    title: "Alert Mate",
-    image: "/images/Alert Mate.jpeg",
-    github: "https://github.com/a-muqeet27/Alert-Mate-FYP.git",
-    description:
-      "My Final Year Project of Drowsiness Detection System using Mobile Application and Integrated Model that detects drowsiness using Facial Landmarks Techniques.",
-    tools: ["Flutter", "Firebase", "FastAPI", "Python", "OpenCV", "PyTorch"],
-  },
-  {
-    title: "Book Verse",
-    image: "/images/Book Verse.png",
-    github: "https://github.com/a-muqeet27/BookVerse.git",
-    description:
-      "BookVerse is a Flutter-based mobile application designed to provide users with a reading experience. The app features to browse, search, and purchase books.",
-    tools: ["Flutter", "Firebase"],
-  },
-  {
-    title: "PERG",
-    image: "/images/PERG.png",
-    github: "https://github.com/a-muqeet27/PERG-Parallel-File-Search-.git",
-    description:
-      "Parallel File Search project using GUI which is a parallelized version of the traditional grep tool. It improves search performance across large files or multiple files using multi-threading, making it suitable for real-time log analysis and big data environments.",
-    tools: ["HTML", "JavaFX", "C++", "OpenMP"],
-  },
-  {
-    title: "Twitter Replica",
-    image: "/images/Twitter.jpeg",
-    github: "https://github.com/a-muqeet27/Twitter-Replica-.git",
-    description:
-      "The Twitter Replica is a DSA-based project that simulates functionalities such as posting tweets, and following users. It uses data structures like stack, queues and linked list to manage users.",
-    tools: ["Java", "JavaFX"],
-  },
-  {
-    title: "Oil Inventory Management System",
-    image: "/images/DATABASE DIAGRAM.png",
-    github: "https://github.com/a-muqeet27/Oil-Inventory-Management-System.git",
-    description:
-      "The Oil Inventory Management System is a database project designed to manage oil products, customers, and stock. It uses relational schema to maintain data integrity. SQL queries are implemented while database views provide simplified access to frequently used inventory information.",
-    tools: ["MS SQL"],
-  },
-  {
-    title: "Traffic Signal Recognition",
-    image: "/images/Traffic.jpeg",
-    github: "https://github.com/a-muqeet27/Traffic-Signal-Recognition",
-    description:
-      "A traffic signal recognition tool which tells the current signal state when an image is passed to it.",
-    tools: ["MATLAB", "Image Processing"],
-  },
-];
+export { featuredProject, projects } from "./projects";
+export type { Project, ProjectGalleryItem } from "./projects";
 
 export const technologies = [
-  { name: "Flutter", image: "/images/Flutter.png" },
-  { name: "HTML5", image: "/images/HTML.png" },
-  { name: "CSS3", image: "/images/CSS.png" },
-  { name: "C++", image: "/images/C++.png" },
-  { name: "Java", image: "/images/Java.png" },
-  { name: "Python", image: "/images/Python.png" },
-  { name: "Dart", image: "/images/Dart.svg" },
-  { name: "JavaScript", image: "/images/JS.png" },
-  { name: "OpenCV", image: "/images/OpenCV.png" },
-  { name: "TensorFlow", image: "/images/TensorFlow.png" },
-  { name: "Scikit-learn", image: "/images/Scikit-learn.png" },
-  { name: "PyTorch", image: "/images/PyTorch.png" },
-  { name: "FastAPI", image: "/images/FastAPI.png" },
-  { name: "REST APIs", image: "/images/REST APIs.png" },
-  { name: "Firebase", image: "/images/Firebase.png" },
-  { name: "MS SQL Server", image: "/images/MSSQL.webp" },
-  { name: "Firebase Firestore", image: "/images/Firebase Firestore.png" },
-  { name: "GitHub", image: "/images/Github.png" },
-  { name: "VS Code", image: "/images/VS Code.png" },
-  { name: "MATLAB", image: "/images/MATLAB.svg" },
-  { name: "Google Colab", image: "/images/Colab.svg" },
+  { name: "Flutter", image: "/images/Flutter.png", category: "mobile" as const },
+  { name: "HTML5", image: "/images/HTML.png", category: "languages" as const },
+  { name: "CSS3", image: "/images/CSS.png", category: "languages" as const },
+  { name: "C++", image: "/images/C++.png", category: "languages" as const },
+  { name: "Java", image: "/images/Java.png", category: "languages" as const },
+  { name: "Python", image: "/images/Python.png", category: "languages" as const },
+  { name: "Dart", image: "/images/Dart.svg", category: "mobile" as const },
+  { name: "JavaScript", image: "/images/JS.png", category: "languages" as const },
+  { name: "OpenCV", image: "/images/OpenCV.png", category: "ai-ml" as const },
+  { name: "TensorFlow", image: "/images/TensorFlow.png", category: "ai-ml" as const },
+  { name: "Scikit-learn", image: "/images/Scikit-learn.png", category: "ai-ml" as const },
+  { name: "PyTorch", image: "/images/PyTorch.png", category: "ai-ml" as const },
+  { name: "FastAPI", image: "/images/FastAPI.png", category: "backend" as const },
+  { name: "REST APIs", image: "/images/REST APIs.png", category: "backend" as const },
+  { name: "Firebase", image: "/images/Firebase.png", category: "database" as const },
+  { name: "MS SQL Server", image: "/images/MSSQL.webp", category: "database" as const },
+  {
+    name: "Firebase Firestore",
+    image: "/images/Firebase Firestore.png",
+    category: "database" as const,
+  },
+  { name: "GitHub", image: "/images/Github.png", category: "tools" as const },
+  { name: "VS Code", image: "/images/VS Code.png", category: "tools" as const },
+  { name: "MATLAB", image: "/images/MATLAB.svg", category: "tools" as const },
+  { name: "Google Colab", image: "/images/Colab.svg", category: "tools" as const },
 ];
+
+export const techCategories = [
+  { id: "all", label: "All" },
+  { id: "mobile", label: "Mobile" },
+  { id: "languages", label: "Languages" },
+  { id: "ai-ml", label: "AI / ML" },
+  { id: "backend", label: "Backend" },
+  { id: "database", label: "Database" },
+  { id: "tools", label: "Tools" },
+] as const;
+
+export type TechCategoryId = (typeof techCategories)[number]["id"];
+
+export const aboutStats = [
+  { label: "Projects Built", value: 7, decimals: 0 },
+  { label: "Technologies", value: technologies.length, decimals: 0 },
+  { label: "CGPA", value: 3.19, decimals: 2 },
+] as const;
 
 export const socialLinks = [
   {

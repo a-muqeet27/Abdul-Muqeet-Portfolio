@@ -26,14 +26,26 @@ export function BackToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400);
+    const updateVisibility = (scrollY: number) => {
+      setVisible(scrollY > 400);
+    };
+
+    if (lenis) {
+      const onLenisScroll = (instance: NonNullable<typeof lenis>) => {
+        updateVisibility(instance.scroll);
+      };
+      lenis.on("scroll", onLenisScroll);
+      return () => lenis.off("scroll", onLenisScroll);
+    }
+
+    const onScroll = () => updateVisibility(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [lenis]);
 
   const scrollToTop = () => {
     if (lenis) {
-      lenis.scrollTo(0, { duration: 1.8 });
+      lenis.scrollTo(0, { duration: 1.2 });
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }

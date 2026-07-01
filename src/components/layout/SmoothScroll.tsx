@@ -4,7 +4,6 @@ import {
   createContext,
   useContext,
   useEffect,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -20,32 +19,29 @@ export function useLenis() {
   return useContext(LenisContext);
 }
 
+const NAV_OFFSET = -80;
+
 export function SmoothScroll({ children }: { children: ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
     const instance = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      autoRaf: true,
+      lerp: 0.1,
       smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 1.15,
+      touchMultiplier: 1.8,
+      syncTouch: true,
+      syncTouchLerp: 0.1,
+      anchors: {
+        offset: NAV_OFFSET,
+      },
     });
 
-    lenisRef.current = instance;
     setLenis(instance);
-
-    function raf(time: number) {
-      instance.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
 
     return () => {
       instance.destroy();
-      lenisRef.current = null;
       setLenis(null);
     };
   }, []);
@@ -58,13 +54,17 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
 export function scrollToSection(
   lenis: Lenis | null,
   href: string,
-  offset = -72
+  offset = NAV_OFFSET
 ) {
   const el = document.querySelector(href);
   if (!el) return;
 
   if (lenis) {
-    lenis.scrollTo(el as HTMLElement, { offset, duration: 1.6 });
+    lenis.scrollTo(el as HTMLElement, {
+      offset,
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
   } else {
     el.scrollIntoView({ behavior: "smooth" });
   }

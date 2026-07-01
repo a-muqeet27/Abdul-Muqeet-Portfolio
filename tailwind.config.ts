@@ -44,6 +44,8 @@ const config: Config = {
         shimmer: "shimmer 3s linear infinite",
         float: "float 3s ease-in-out infinite",
         "gradient-shift": "gradientShift 15s ease infinite",
+        "spin-slow": "spin 8s linear infinite",
+        marquee: "marquee 40s linear infinite",
       },
       keyframes: {
         shimmer: {
@@ -58,6 +60,10 @@ const config: Config = {
           "0%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0% 50%" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },

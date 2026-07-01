@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
-  fadeUpExit,
+  fadeUp,
   staggerContainer,
   staggerItem,
   titleReveal,
@@ -26,7 +26,7 @@ export function AnimatedSection({
   delay = 0,
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-10% 0px -10% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
 
   return (
     <motion.section
@@ -35,7 +35,7 @@ export function AnimatedSection({
       className={className}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      variants={fadeUpExit}
+      variants={fadeUp}
       transition={{ delay }}
     >
       {children}
@@ -51,7 +51,7 @@ export function StaggerContainer({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-8% 0px -8% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-8% 0px -8% 0px" });
 
   return (
     <motion.div
@@ -82,7 +82,7 @@ export function StaggerItem({
 
 export function SectionTitle({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-10% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
     <div ref={ref} className="relative mb-10 w-full text-center">
@@ -116,7 +116,7 @@ export function FadeIn({
   direction?: "up" | "down" | "left" | "right" | "none";
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-8% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-8% 0px" });
 
   const offset = {
     up: { y: 24 },
@@ -155,7 +155,7 @@ export function RevealOnScroll({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-10% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
 
   return (
     <motion.div

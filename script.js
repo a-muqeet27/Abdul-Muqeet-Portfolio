@@ -376,3 +376,223 @@ githubLinks.forEach(link => {
 
 console.log('%c👋 Welcome to My Portfolio!', 'color: #00d4ff; font-size: 20px; font-weight: bold;');
 console.log('%cFeel free to explore the code and reach out if you have any questions!', 'color: #a0a0b0; font-size: 14px;');
+
+// ── Project Detail Modal ──────────────────────────────────────────────────────
+const projectsData = {
+    'drowsiness-detection': {
+        title: 'Drowsiness Detection Model',
+        github: 'https://github.com/a-muqeet27/Drowsiness-Detection-Model.git',
+        description: 'A Drowsiness Detection Model uses Computer Vision and Machine Learning techniques to monitor eye-closure and yawning in real time to identify signs of drowsiness.',
+        tools: ['Python', 'OpenCV', 'TensorFlow', 'Keras', 'PyTorch', 'NumPy', 'Pandas'],
+        gallery: [
+            { src: 'images/Drowsiness Detection Model.png', caption: 'Drowsiness Detection Model Architecture' }
+        ],
+        highlights: [
+            'Real-time eye-closure and yawning monitoring',
+            'Computer vision and machine learning based detection',
+            'Built with OpenCV, TensorFlow, Keras, and PyTorch'
+        ]
+    },
+    'alert-mate': {
+        title: 'Alert Mate',
+        badge: 'Final Year Project',
+        github: 'https://github.com/a-muqeet27/Alert-Mate-FYP.git',
+        description: 'My Final Year Project of Drowsiness Detection System using Mobile Application and Integrated Model that detects drowsiness using Facial Landmarks Techniques.',
+        tools: ['Flutter', 'Firebase', 'FastAPI', 'Python', 'OpenCV', 'PyTorch'],
+        gallery: [
+            { src: 'images/Alert Mate.jpeg', caption: 'Alert Mate Mobile Application' },
+            { src: 'images/Drowsiness Detection Model.png', caption: 'Integrated Drowsiness Detection Model' }
+        ],
+        highlights: [
+            'Mobile application for drowsiness detection',
+            'Integrated model using facial landmarks techniques',
+            'Flutter frontend with Firebase backend integration',
+            'FastAPI and Python for model serving and processing'
+        ]
+    },
+    'book-verse': {
+        title: 'Book Verse',
+        github: 'https://github.com/a-muqeet27/BookVerse.git',
+        description: 'BookVerse is a Flutter-based mobile application designed to provide users with a reading experience. The app features to browse, search, and purchase books.',
+        tools: ['Flutter', 'Firebase'],
+        gallery: [{ src: 'images/Book Verse.png', caption: 'Book Verse App Interface' }],
+        highlights: ['Browse, search, and purchase books', 'Flutter-based mobile reading experience', 'Firebase powered backend']
+    },
+    'perg': {
+        title: 'PERG',
+        github: 'https://github.com/a-muqeet27/PERG-Parallel-File-Search-.git',
+        description: 'Parallel File Search project using GUI which is a parallelized version of the traditional grep tool. It improves search performance across large files or multiple files using multi-threading, making it suitable for real-time log analysis and big data environments.',
+        tools: ['HTML', 'JavaFX', 'C++', 'OpenMP'],
+        gallery: [{ src: 'images/PERG.png', caption: 'PERG Parallel File Search GUI' }],
+        highlights: ['Parallelized grep-style file search', 'Multi-threaded performance for large files', 'GUI built with JavaFX and OpenMP']
+    },
+    'twitter-replica': {
+        title: 'Twitter Replica',
+        github: 'https://github.com/a-muqeet27/Twitter-Replica-.git',
+        description: 'The Twitter Replica is a DSA-based project that simulates functionalities such as posting tweets, and following users. It uses data structures like stack, queues and linked list to manage users.',
+        tools: ['Java', 'JavaFX'],
+        gallery: [{ src: 'images/Twitter.jpeg', caption: 'Twitter Replica Application' }],
+        highlights: ['Tweet posting and user following simulation', 'Stack, queue, and linked list based user management', 'Java and JavaFX desktop application']
+    },
+    'oil-inventory': {
+        title: 'Oil Inventory Management System',
+        github: 'https://github.com/a-muqeet27/Oil-Inventory-Management-System.git',
+        description: 'The Oil Inventory Management System is a database project designed to manage oil products, customers, and stock. It uses relational schema to maintain data integrity. SQL queries are implemented while database views provide simplified access to frequently used inventory information.',
+        tools: ['MS SQL'],
+        gallery: [{ src: 'images/DATABASE DIAGRAM.png', caption: 'Database Schema Diagram' }],
+        highlights: ['Manages oil products, customers, and stock', 'Relational schema with SQL queries and views', 'MS SQL Server database project']
+    },
+    'traffic-signal': {
+        title: 'Traffic Signal Recognition',
+        github: 'https://github.com/a-muqeet27/Traffic-Signal-Recognition',
+        description: 'A traffic signal recognition tool which tells the current signal state when an image is passed to it.',
+        tools: ['MATLAB', 'Image Processing'],
+        gallery: [{ src: 'images/Traffic.jpeg', caption: 'Traffic Signal Recognition' }],
+        highlights: ['Detects traffic signal state from images', 'Image processing with MATLAB']
+    }
+};
+
+const projectModal = document.getElementById('project-modal');
+let currentGalleryIndex = 0;
+let currentProject = null;
+
+function renderGalleryImage(index) {
+    if (!currentProject) return;
+    const gallery = currentProject.gallery;
+    const item = gallery[index];
+    const img = document.getElementById('project-modal-image');
+    const caption = document.getElementById('project-modal-caption');
+    const prevBtn = document.querySelector('.project-modal-prev');
+    const nextBtn = document.querySelector('.project-modal-next');
+
+    img.src = item.src;
+    img.alt = item.caption || currentProject.title;
+    caption.textContent = item.caption || '';
+
+    const showNav = gallery.length > 1;
+    prevBtn.classList.toggle('hidden', !showNav);
+    nextBtn.classList.toggle('hidden', !showNav);
+
+    document.querySelectorAll('.project-modal-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+}
+
+function openProjectModal(projectId) {
+    const project = projectsData[projectId];
+    if (!project || !projectModal) return;
+
+    currentProject = project;
+    currentGalleryIndex = 0;
+
+    document.getElementById('project-modal-title').textContent = project.title;
+    document.getElementById('project-modal-description').textContent = project.description;
+    document.getElementById('project-modal-github').href = project.github;
+
+    const badge = document.getElementById('project-modal-badge');
+    if (project.badge) {
+        badge.textContent = project.badge;
+        badge.hidden = false;
+    } else {
+        badge.hidden = true;
+    }
+
+    const highlightsList = document.getElementById('project-modal-highlights');
+    highlightsList.innerHTML = '';
+    (project.highlights || []).forEach(text => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        highlightsList.appendChild(li);
+    });
+
+    const toolsWrap = document.getElementById('project-modal-tools');
+    toolsWrap.innerHTML = '';
+    project.tools.forEach(tool => {
+        const span = document.createElement('span');
+        span.className = 'tool-badge';
+        span.textContent = tool;
+        toolsWrap.appendChild(span);
+    });
+
+    const thumbsWrap = document.getElementById('project-modal-thumbs');
+    thumbsWrap.innerHTML = '';
+    if (project.gallery.length > 1) {
+        project.gallery.forEach((item, i) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'project-modal-thumb' + (i === 0 ? ' active' : '');
+            btn.innerHTML = `<img src="${item.src}" alt="${item.caption || ''}">`;
+            btn.addEventListener('click', () => {
+                currentGalleryIndex = i;
+                renderGalleryImage(i);
+            });
+            thumbsWrap.appendChild(btn);
+        });
+    }
+
+    renderGalleryImage(0);
+    projectModal.classList.add('active');
+    projectModal.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+    if (!projectModal) return;
+    projectModal.classList.remove('active');
+    projectModal.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+    currentProject = null;
+}
+
+document.querySelectorAll('[data-project]').forEach(card => {
+    const projectId = card.getAttribute('data-project');
+
+    card.addEventListener('click', (e) => {
+        if (e.target.closest('.project-github-link')) return;
+        if (e.target.closest('.project-view-btn')) return;
+        openProjectModal(projectId);
+    });
+
+    card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.closest('.project-github-link')) return;
+            e.preventDefault();
+            openProjectModal(projectId);
+        }
+    });
+
+    card.querySelector('.project-view-btn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openProjectModal(projectId);
+    });
+});
+
+document.querySelectorAll('[data-close-modal]').forEach(el => {
+    el.addEventListener('click', closeProjectModal);
+});
+
+document.querySelector('.project-modal-prev')?.addEventListener('click', () => {
+    if (!currentProject) return;
+    currentGalleryIndex = (currentGalleryIndex - 1 + currentProject.gallery.length) % currentProject.gallery.length;
+    renderGalleryImage(currentGalleryIndex);
+});
+
+document.querySelector('.project-modal-next')?.addEventListener('click', () => {
+    if (!currentProject) return;
+    currentGalleryIndex = (currentGalleryIndex + 1) % currentProject.gallery.length;
+    renderGalleryImage(currentGalleryIndex);
+});
+
+document.addEventListener('keydown', (e) => {
+    if (!projectModal?.classList.contains('active')) return;
+    if (e.key === 'Escape') closeProjectModal();
+    if (e.key === 'ArrowRight' && currentProject) {
+        currentGalleryIndex = (currentGalleryIndex + 1) % currentProject.gallery.length;
+        renderGalleryImage(currentGalleryIndex);
+    }
+    if (e.key === 'ArrowLeft' && currentProject) {
+        currentGalleryIndex = (currentGalleryIndex - 1 + currentProject.gallery.length) % currentProject.gallery.length;
+        renderGalleryImage(currentGalleryIndex);
+    }
+});
+// ─────────────────────────────────────────────────────────────────────────────
