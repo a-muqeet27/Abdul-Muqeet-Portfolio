@@ -3,6 +3,11 @@ export type ProjectGalleryItem = {
   caption?: string;
 };
 
+export type { ProjectShowcase, RoleFilter, AppRole } from "./alert-mate-showcase";
+
+import type { ProjectShowcase } from "./alert-mate-showcase";
+import { alertMateShowcase } from "./alert-mate-showcase";
+
 export type Project = {
   title: string;
   image: string;
@@ -12,24 +17,26 @@ export type Project = {
   gallery?: ProjectGalleryItem[];
   highlights?: string[];
   badge?: string;
+  showcase?: ProjectShowcase;
 };
 
 export const featuredProject: Project = {
   title: "Alert Mate",
-  image: "/images/Alert Mate.jpeg",
+  image: alertMateShowcase.thumbnail.src,
   github: "https://github.com/a-muqeet27/Alert-Mate-FYP.git",
   description:
     "My Final Year Project — a Drowsiness Detection System using a mobile application and integrated model that detects drowsiness using facial landmarks techniques.",
   tools: ["Flutter", "Firebase", "FastAPI", "Python", "OpenCV", "PyTorch"],
   badge: "FINAL YEAR PROJECT",
+  showcase: alertMateShowcase,
   gallery: [
     {
-      src: "/images/Alert Mate.jpeg",
-      caption: "Alert Mate Mobile Application",
+      src: alertMateShowcase.thumbnail.src,
+      caption: "Alert Mate",
     },
     {
-      src: "/images/Drowsiness Detection Model.png",
-      caption: "Integrated Drowsiness Detection Model",
+      src: alertMateShowcase.poster.src,
+      caption: "Alert Mate Project Poster",
     },
   ],
   highlights: [

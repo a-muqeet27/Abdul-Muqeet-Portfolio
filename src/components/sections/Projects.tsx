@@ -70,7 +70,12 @@ function ProjectCard({
                 alt={project.title}
                 width={480}
                 height={300}
-                className="h-full w-full object-cover transition-transform duration-600 ease-out group-hover:scale-[1.04]"
+                className={cn(
+                  "h-full w-full transition-transform duration-600 ease-out group-hover:scale-[1.04]",
+                  project.showcase
+                    ? "object-contain bg-[#0a0a12] p-3"
+                    : "object-cover"
+                )}
               />
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-dark-card/80 via-transparent to-transparent sm:bg-gradient-to-r sm:from-dark-card/50" />
 
@@ -146,7 +151,7 @@ function ProjectCard({
                 ) : (
                   <Expand className="h-3.5 w-3.5" />
                 )}
-                {hasGallery ? "Gallery" : "Details"}
+                {hasGallery ? "Explore FYP" : "Details"}
                 {hasGallery && (
                   <span className="rounded bg-white/20 px-1 py-px text-[9px] font-bold">
                     {project.gallery!.length}
