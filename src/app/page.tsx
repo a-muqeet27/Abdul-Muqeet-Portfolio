@@ -21,8 +21,8 @@ export default function Home() {
         <main>
           <HomeSection />
           <AboutSection />
-          <EducationSection />
           <ExperienceSection />
+          <EducationSection />
           <ProjectsSection />
           <TechnologiesSection />
           <DownloadSection />

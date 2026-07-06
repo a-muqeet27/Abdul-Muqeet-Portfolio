@@ -11,8 +11,8 @@ export const site = {
 export const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
-  { href: "#education", label: "Education" },
   { href: "#experience", label: "Experience" },
+  { href: "#education", label: "Education" },
   { href: "#projects", label: "Projects" },
   { href: "#technologies", label: "Technologies" },
   { href: "#download", label: "Download" },
@@ -28,14 +28,14 @@ export const education = [
   {
     image: "/images/COMSATS.png",
     school: "COMSATS University Islamabad, Lahore Campus",
-    level: "Bachelor's in Computer Science",
-    year: "2022 - Present",
-    marks: "CGPA: 3.19",
+    level: "Bachelor of Science in Computer Science",
+    year: "2022 - 2026",
+    marks: "CGPA: 3.24",
   },
   {
     image: "/images/PGC.png",
     school: "Punjab College of Science",
-    level: "Intermediate in Pre-Medical with Mathematics",
+    level: "FSc. Intermediate in Pre-Medical with Mathematics",
     year: "2019 - 2021",
     marks: "Marks: 957/1100 in Pre-Medical and 164/200 in Mathematics",
   },
@@ -51,6 +51,14 @@ export const education = [
 export const experience = {
   intro: "A timeline of professional growth and impactful contributions.",
   items: [
+    {
+      logo: "/images/NETSOL.png",
+      role: "Full Stack Development Engineering Intern",
+      company: "NETSOL Technologies",
+      date: "July 8th, 2026 - Present",
+      bullets: [],
+      tags: [],
+    },
     {
       logo: "/images/DevelopersHub_Corporation.jpeg",
       role: "Flutter Developer Intern",
@@ -113,7 +121,7 @@ export type TechCategoryId = (typeof techCategories)[number]["id"];
 export const aboutStats = [
   { label: "Projects Built", value: 17, decimals: 0 },
   { label: "Technologies", value: technologies.length, decimals: 0 },
-  { label: "CGPA", value: 3.19, decimals: 2 },
+  { label: "CGPA", value: 3.24, decimals: 2 },
 ] as const;
 
 export const socialLinks = [

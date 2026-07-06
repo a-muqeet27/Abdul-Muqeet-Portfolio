@@ -21,6 +21,7 @@ function ExperienceCard({
   item: (typeof experience.items)[0];
 }) {
   const [expanded, setExpanded] = useState(false);
+  const hasDetails = item.bullets.length > 0 || item.tags.length > 0;
 
   return (
     <motion.div
@@ -53,6 +54,7 @@ function ExperienceCard({
           <p className="text-sm text-primary sm:text-base">{item.company}</p>
           <p className="text-xs text-text-gray sm:text-sm">{item.date}</p>
         </div>
+        {hasDetails && (
         <motion.button
           type="button"
           onClick={() => setExpanded(!expanded)}
@@ -73,10 +75,11 @@ function ExperienceCard({
             <ChevronDown className="h-5 w-5" />
           </motion.div>
         </motion.button>
+        )}
       </div>
 
       <AnimatePresence initial={false}>
-        {expanded && (
+        {hasDetails && expanded && (
           <motion.div
             key="content"
             initial={{ height: 0, opacity: 0 }}
