@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Entity Framework">
+  <rect width="128" height="128" rx="16" fill="#68217A"/>
+  <ellipse cx="64" cy="52" rx="28" ry="12" fill="none" stroke="#fff" stroke-width="6"/>
+  <path d="M36 52v28c0 15 56 15 56 0V52" fill="none" stroke="#fff" stroke-width="6"/>
+  <path d="M36 66h56" fill="none" stroke="#fff" stroke-width="6"/>
+</svg>

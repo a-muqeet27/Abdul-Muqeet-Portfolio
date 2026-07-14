@@ -56,8 +56,12 @@ export const experience = {
       role: "Full Stack Development Engineering Intern",
       company: "NETSOL Technologies",
       date: "July 8th, 2026 - Present",
-      bullets: [],
-      tags: [],
+      bullets: [
+        "Developing web applications using MVC (.NET 10) architecture.",
+        "Building CRUD-based applications using Controllers, Views, Models, and Razor Pages/View Engine.",
+        "Creating and managing database using Entity Framework Core.",
+      ],
+      tags: [".NET 10", "Entity Framework", "React.js", "Node.js", "Express.js", "MVC"],
     },
     {
       logo: "/images/DevelopersHub_Corporation.jpeg",
@@ -92,9 +96,18 @@ export const technologies = [
   { name: "Scikit-learn", image: "/images/Scikit-learn.png", category: "ai-ml" as const },
   { name: "PyTorch", image: "/images/PyTorch.png", category: "ai-ml" as const },
   { name: "FastAPI", image: "/images/FastAPI.png", category: "backend" as const },
+  { name: ".NET 10", image: "/images/dotnet.svg", category: "backend" as const },
+  { name: "Node.js", image: "/images/nodejs.svg", category: "backend" as const },
+  { name: "Express.js", image: "/images/express.svg", category: "backend" as const },
+  { name: "React.js", image: "/images/react.svg", category: "backend" as const },
   { name: "REST APIs", image: "/images/REST APIs.png", category: "backend" as const },
   { name: "Firebase", image: "/images/Firebase.png", category: "database" as const },
   { name: "MS SQL Server", image: "/images/MSSQL.webp", category: "database" as const },
+  {
+    name: "Entity Framework",
+    image: "/images/entity-framework.svg",
+    category: "database" as const,
+  },
   {
     name: "Firebase Firestore",
     image: "/images/Firebase Firestore.png",
