@@ -2,7 +2,7 @@ export const site = {
   name: "Abdul Muqeet",
   title: "Abdul Muqeet's Portfolio",
   subtitle:
-    "Software Developer as an expert in AI/ML and Mobile Application Development",
+    "Software Developer as an expert in AI/ML and Development",
   profileImage: "/images/Abdul Muqeet.jpg",
   resumeFile: "/Abdul Muqeet's Resume.pdf",
   resumeDownloadName: "Abdul Muqeet's Resume.pdf",
@@ -61,7 +61,7 @@ export const experience = {
         "Building CRUD-based applications using Controllers, Views, Models, and Razor Pages/View Engine.",
         "Creating and managing database using Entity Framework Core.",
       ],
-      tags: [".NET 10", "Entity Framework", "React.js", "Node.js", "Express.js", "MVC"],
+      tags: [".NET 10", "Entity Framework", "MVC"],
     },
     {
       logo: "/images/DevelopersHub_Corporation.jpeg",
