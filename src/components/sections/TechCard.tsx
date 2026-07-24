@@ -15,6 +15,7 @@ type TechCardProps = {
 
 const categoryLabels: Record<string, string> = {
   mobile: "Mobile",
+  web: "Web",
   languages: "Languages",
   "ai-ml": "AI / ML",
   backend: "Backend",
@@ -27,6 +28,11 @@ const categoryAccent: Record<string, { ring: string; glow: string; label: string
     ring: "group-hover:border-primary/40",
     glow: "group-hover:shadow-[0_0_24px_rgba(0,212,255,0.2)]",
     label: "text-primary/70",
+  },
+  web: {
+    ring: "group-hover:border-[#38bdf8]/40",
+    glow: "group-hover:shadow-[0_0_24px_rgba(56,189,248,0.2)]",
+    label: "text-[#38bdf8]/70",
   },
   languages: {
     ring: "group-hover:border-[#6b9fff]/40",

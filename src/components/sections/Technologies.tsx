@@ -25,6 +25,7 @@ function getCategoryCounts() {
 const categoryLabels: Record<string, string> = {
   all: "All Technologies",
   mobile: "Mobile Development",
+  web: "Web Development",
   languages: "Programming Languages",
   "ai-ml": "AI & Machine Learning",
   backend: "Backend & APIs",
