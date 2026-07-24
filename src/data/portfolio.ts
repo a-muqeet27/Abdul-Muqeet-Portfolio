@@ -91,7 +91,7 @@ export const technologies = [
   { name: "React.js", image: "/images/react.svg", category: "web" as const },
   { name: "Tailwind CSS", image: "/images/tailwind.svg", category: "web" as const },
   { name: "C++", image: "/images/C++.png", category: "languages" as const },
-  { name: "C#", image: "/images/csharp.svg", category: "languages" as const },
+  { name: "C#", image: "/images/csharp.svg", category: "web" as const },
   { name: "Java", image: "/images/Java.png", category: "languages" as const },
   { name: "Python", image: "/images/Python.png", category: "languages" as const },
   { name: "OpenCV", image: "/images/OpenCV.png", category: "ai-ml" as const },
@@ -135,7 +135,7 @@ export const techCategories = [
 export type TechCategoryId = (typeof techCategories)[number]["id"];
 
 export const aboutStats = [
-  { label: "Projects Built", value: 17, decimals: 0 },
+  { label: "Projects Built", value: 18, decimals: 0 },
   { label: "Technologies", value: technologies.length, decimals: 0 },
   { label: "CGPA", value: 3.24, decimals: 2 },
 ] as const;
